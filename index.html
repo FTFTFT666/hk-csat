@@ -36,6 +36,11 @@
   .insight{background:#fffbe6;border-left:4px solid #f0b429;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:18px;font-size:13px}.insight b{color:#b7791f}
   .sec{background:var(--surface);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
   .sec-hd{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}.sec-hd h2{font-size:16px;font-weight:700}
+  .sec.collapsible .sec-hd{cursor:pointer;user-select:none}
+  .sec.collapsible .sec-toggle{display:inline-block;width:18px;color:#7c3aed;font-weight:700;transition:transform .18s}
+  .sec.collapsible.collapsed .sec-toggle{transform:rotate(-90deg)}
+  .sec.collapsible.collapsed>.blk,.sec.collapsible.collapsed>.measures,.sec.collapsible.collapsed .qsum,.sec.collapsible.collapsed .add-btn,.sec.collapsible.collapsed .reason-bars,.sec.collapsible.collapsed .cat-grid,.sec.collapsible.collapsed>table,.sec.collapsible.collapsed>div>table{display:none}
+  .sec.collapsible.collapsed .sec-hd{margin-bottom:0}
   .sec-sat{margin-left:auto;display:flex;align-items:baseline;gap:8px}.sec-sat .v{font-size:20px;font-weight:700}.sec-sat .p{font-size:12px;font-weight:600}
   .badge{font-size:11px;padding:2px 8px;border-radius:20px;font-weight:600}
   .b-red{background:#fdecea;color:#e34c4c}.b-org{background:#fff3e0;color:#e67e22}.b-grn{background:#e8f5e9;color:#27ae60}.b-gry{background:#f0f2f5;color:#666}.b-new{background:#f3e5f5;color:#8e44ad}
@@ -750,6 +755,15 @@ function ensureSecDel(){document.querySelectorAll('.sec').forEach(function(s){
   }
 });}
 function ensureMeasureDel(){document.querySelectorAll('.measure').forEach(function(m){if(!m.querySelector(':scope > .del-m')){var x=document.createElement('span');x.className='del-m';x.setAttribute('onclick','delM(this)');x.textContent='删除';m.insertBefore(x,m.firstChild);}});}
+function toggleSec(el){var sec=el.closest('.sec');if(sec)sec.classList.toggle('collapsed');}
+function ensureCollapsible(){
+  document.querySelectorAll('.sec').forEach(function(s){
+    var h2=s.querySelector('.sec-hd h2');if(!h2)return;
+    if(!/^(一、|二、|三、|四、|五、|六、)/.test(h2.textContent))return;
+    if(!s.classList.contains('collapsible')){s.classList.add('collapsible');
+      var arrow=document.createElement('span');arrow.className='sec-toggle';arrow.textContent='▼';arrow.setAttribute('onclick','event.stopPropagation();toggleSec(this)');h2.parentNode.insertBefore(arrow,h2);}
+  });
+}
 function addPlan(){const tb=document.getElementById('planBody');const cols=document.querySelectorAll('#planTable thead th').length;const tr=document.createElement('tr');let html='';for(let i=0;i<cols;i++)html+='<td class="ed" contenteditable="true">—</td>';tr.innerHTML=html;tb.appendChild(tr);planEnhance();}
 function moveRow(btn,dir){const tr=btn.closest('tr');const sib=dir<0?tr.previousElementSibling:tr.nextElementSibling;if(!sib)return;if(dir<0)tr.parentNode.insertBefore(tr,sib);else tr.parentNode.insertBefore(sib,tr);}
 function delRow(btn){const tr=btn.closest('tr');if(tr)tr.remove();}
@@ -770,7 +784,7 @@ function doResize(e){if(!_rz)return;const nw=Math.max(60,_rz.w+(e.pageX-_rz.x));
 function endResize(){_rz=null;document.removeEventListener('mousemove',doResize);document.removeEventListener('mouseup',endResize);}
 function toggleHist(h){h.closest('.hist-item').classList.toggle('open');}
 function exportHTML(){const c=document.documentElement.cloneNode(true);const tb=c.querySelector('.toolbar');if(tb)tb.remove();c.querySelectorAll('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.col-resize,.row-tools,.sec-del').forEach(e=>e.remove());c.querySelectorAll('[contenteditable]').forEach(e=>e.removeAttribute('contenteditable'));const bd=c.querySelector('body');if(bd){bd.classList.remove('edit-on');bd.style.paddingTop='24px';}const blob=new Blob(['<!DOCTYPE html>\n'+c.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='hk-csat-august2026-已编辑.html';a.click();setTimeout(function(){alert('已保存归档为 HTML 文件(在浏览器下载目录)。\n这份文件是永久保存、可跨设备、不会被覆盖的版本。');},200);}
-ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();
+ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();ensureCollapsible();
 /* 自动保存:编辑输入 + 结构变化(增删/排序/删列等) */
 document.addEventListener('input',function(e){if(document.body.classList.contains('edit-on'))saveLocal();});
 (function(){var _b=document.body;_b.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&(t.closest('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.row-tools,.add-foot,.sec-del'))){setTimeout(saveLocal,60);}});})();
@@ -827,6 +841,15 @@ function ensureSecDel(){document.querySelectorAll('.sec').forEach(function(s){
   }
 });}
 function ensureMeasureDel(){document.querySelectorAll('.measure').forEach(function(m){if(!m.querySelector(':scope > .del-m')){var x=document.createElement('span');x.className='del-m';x.setAttribute('onclick','delM(this)');x.textContent='删除';m.insertBefore(x,m.firstChild);}});}
+function toggleSec(el){var sec=el.closest('.sec');if(sec)sec.classList.toggle('collapsed');}
+function ensureCollapsible(){
+  document.querySelectorAll('.sec').forEach(function(s){
+    var h2=s.querySelector('.sec-hd h2');if(!h2)return;
+    if(!/^(一、|二、|三、|四、|五、|六、)/.test(h2.textContent))return;
+    if(!s.classList.contains('collapsible')){s.classList.add('collapsible');
+      var arrow=document.createElement('span');arrow.className='sec-toggle';arrow.textContent='▼';arrow.setAttribute('onclick','event.stopPropagation();toggleSec(this)');h2.parentNode.insertBefore(arrow,h2);}
+  });
+}
 function addPlan(){const tb=document.getElementById('planBody');const cols=document.querySelectorAll('#planTable thead th').length;const tr=document.createElement('tr');let html='';for(let i=0;i<cols;i++)html+='<td class="ed" contenteditable="true">—</td>';tr.innerHTML=html;tb.appendChild(tr);planEnhance();}
 function moveRow(btn,dir){const tr=btn.closest('tr');const sib=dir<0?tr.previousElementSibling:tr.nextElementSibling;if(!sib)return;if(dir<0)tr.parentNode.insertBefore(tr,sib);else tr.parentNode.insertBefore(sib,tr);}
 function delRow(btn){const tr=btn.closest('tr');if(tr)tr.remove();}
@@ -870,7 +893,7 @@ function publishSite(){
     .then(function(){if(btn){btn.textContent='✅ 已发布';}alert('已提交到 GitHub,几秒后 Pages 自动发布。\n刷新 https://'+GH_USER+'.github.io/'+GH_REPO+'/ 即见最新内容。');location.reload();})
     .catch(function(e){if(btn){btn.textContent=old;btn.disabled=false;}console.error('publish error',e);alert('保存失败: '+e.message+'\n\n排查:\n1. 是否点过「🔑 设置密钥」并粘贴了 token?\n2. token 是否还有效(repo 权限)?\n3. 看浏览器控制台(F12)的红色报错。');});
 }
-ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();
+ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();ensureCollapsible();
 /* 自动保存:编辑输入 + 结构变化(增删/排序/删列等) */
 document.addEventListener('input',function(e){if(document.body.classList.contains('edit-on'))saveLocal();});
 (function(){var _b=document.body;_b.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&(t.closest('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.row-tools,.add-foot,.sec-del'))){setTimeout(saveLocal,60);}});})();
