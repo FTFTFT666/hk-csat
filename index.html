@@ -885,9 +885,9 @@ function publishSite(){
       if(j&&j.sha)body.sha=j.sha;
       return fetch(api,{method:'PUT',headers:{'Authorization':'Bearer '+tk,'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
     })
-    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(r){return r.text().then(function(t){var j;try{j=JSON.parse(t);}catch(e){j={};}if(!j.content&&!j.commit){throw new Error('HTTP '+r.status+(j.message?(' | '+j.message):(' | '+t.slice(0,200))));}return j;});})
     .then(function(){if(btn){btn.textContent='✅ 已发布';}alert('已提交到 GitHub,几秒后 Pages 自动发布。\n刷新 https://'+GH_USER+'.github.io/'+GH_REPO+'/ 即见最新内容。');location.reload();})
-    .catch(function(e){if(btn){btn.textContent=old;btn.disabled=false;}alert('提交失败:'+e.message+'\n(检查网络/密钥,可点「🔑 设置密钥」重设)');});
+    .catch(function(e){if(btn){btn.textContent=old;btn.disabled=false;}console.error('publish error',e);alert('保存失败: '+e.message+'\n\n排查:\n1. 是否点过「🔑 设置密钥」并粘贴了 token?\n2. token 是否还有效(repo 权限)?\n3. 看浏览器控制台(F12)的红色报错。');});
 }
 ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();
 /* 自动保存:编辑输入 + 结构变化(增删/排序/删列等) */
