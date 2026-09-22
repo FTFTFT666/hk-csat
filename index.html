@@ -135,7 +135,8 @@
   <span class="hint" id="hint">✎ 可直接点文字修改 · 增删问题点/措施/计划行 · 改完点「💾 保存归档」下载文件才是永久保存(跨设备/防丢)</span>
   <button class="btn-edit" id="btnEdit" onclick="toggleEdit()">✎ 编辑</button>
   <button class="btn-save" onclick="exportHTML()" title="下载成 HTML 文件,永久保存、可跨设备、我不会覆盖">💾 保存归档</button>
-  <button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff;border-color:#7c3aed" title="下载最新 index.html 并复制部署命令;回来对话粘贴给 Claude 或自行在终端运行即可上线">🚀 发布上线</button>
+  <button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff;border-color:#7c3aed" title="把当前编辑内容提交到 GitHub 仓库,几秒后 Pages 自动发布,别人刷新链接即见最新">🚀 保存到网站</button>
+  <button class="btn-print" onclick="setGHToken()" title="设置你的 GitHub token(仅存本机浏览器,不写入公开网页/仓库,别人看不到)">🔑 设置密钥</button>
   <button class="btn-print" onclick="window.print()">🖨 打印/PDF</button>
   <button class="btn-print" onclick="clearLocal()" title="清除本机自动保存,恢复到当前发布版">↺ 清除本地保存</button>
   <span id="saveTip" style="font-size:11.5px;color:#27ae60;display:none">草稿已自动存本机</span>
@@ -865,21 +866,28 @@ function doResize(e){if(!_rz)return;const nw=Math.max(60,_rz.w+(e.pageX-_rz.x));
 function endResize(){_rz=null;document.removeEventListener('mousemove',doResize);document.removeEventListener('mouseup',endResize);}
 function toggleHist(h){h.closest('.hist-item').classList.toggle('open');}
 function exportHTML(){const c=document.documentElement.cloneNode(true);const tb=c.querySelector('.toolbar');if(tb)tb.remove();c.querySelectorAll('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.col-resize,.row-tools,.sec-del').forEach(e=>e.remove());c.querySelectorAll('[contenteditable]').forEach(e=>e.removeAttribute('contenteditable'));const bd=c.querySelector('body');if(bd){bd.classList.remove('edit-on');bd.style.paddingTop='24px';}const blob=new Blob(['<!DOCTYPE html>\n'+c.outerHTML],{type:'text/html;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='hk-csat-august2026-已编辑.html';a.click();setTimeout(function(){alert('已保存归档为 HTML 文件(在浏览器下载目录)。\n这份文件是永久保存、可跨设备、不会被覆盖的版本。');},200);}
+var GH_USER='FTFTFT666';var GH_REPO='hk-csat';
+function getGHToken(){try{return localStorage.getItem('gh_token')||'';}catch(e){return '';}}
+function setGHToken(){var t=prompt('粘贴你的 GitHub Personal Access Token(repo 权限):\n仅存在你本机浏览器,不会写入公开网页/仓库,别人看不到。');if(t&&t.trim()){try{localStorage.setItem('gh_token',t.trim());alert('已保存到本机浏览器。现在可点「保存到网站」发布了。');}catch(e){alert('保存失败:'+e.message);}}}
+function cleanHTML(){var c=document.documentElement.cloneNode(true);var tb=c.querySelector('.toolbar');if(tb)tb.remove();c.querySelectorAll('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.col-resize,.row-tools,.sec-del').forEach(function(e){e.remove();});c.querySelectorAll('[contenteditable]').forEach(function(e){e.removeAttribute('contenteditable');});var bd=c.querySelector('body');if(bd){bd.classList.remove('edit-on');bd.style.paddingTop='24px';}return'<!DOCTYPE html>\n'+c.outerHTML;}
 function publishSite(){
-  var c=document.documentElement.cloneNode(true);
-  var tb=c.querySelector('.toolbar');if(tb)tb.remove();
-  c.querySelectorAll('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.col-resize,.row-tools,.sec-del').forEach(function(e){e.remove();});
-  c.querySelectorAll('[contenteditable]').forEach(function(e){e.removeAttribute('contenteditable');});
-  var bd=c.querySelector('body');if(bd){bd.classList.remove('edit-on');bd.style.paddingTop='24px';}
-  var html='<!DOCTYPE html>\n'+c.outerHTML;
-  // 1) 下载 index.html
-  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
-  var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='index.html';a.click();
-  // 2) 复制部署命令到剪贴板
-  var cmd='cd ~/Desktop/skii && mkdir -p deploy-unified && cp index.html deploy-unified/index.html 2>/dev/null; mv -f ~/Downloads/index.html deploy-unified/index.html 2>/dev/null; SURGE_LOGIN=FTFTFT@FUTU.COM SURGE_TOKEN=e453f04d42124dffdf5cc31945d8247c npx --yes surge ./deploy-unified hk-csat.surge.sh';
-  try{navigator.clipboard.writeText(cmd).then(function(){
-    setTimeout(function(){alert('已下载 index.html(在浏览器下载目录)。\n\n部署命令已复制到剪贴板:\n\n'+cmd+'\n\n→ 回到与 Claude 的对话,直接粘贴发给我(或在本机终端运行),即可上线 https://hk-csat.surge.sh');},200);
-  },function(){alert('已下载 index.html。\n部署命令(请手动复制):\n\n'+cmd);});}catch(e){alert('已下载 index.html。\n部署命令:\n\n'+cmd);}
+  var tk=getGHToken();
+  if(!tk){alert('还没设置发布密钥。请点工具栏「🔑 设置密钥」粘贴一次你的 GitHub token(仅存本机,不公开)。');return;}
+  var html=cleanHTML();
+  var b64=btoa(unescape(encodeURIComponent(html)));
+  var btn=document.querySelector('[onclick*=publishSite]');var old=btn?btn.textContent:'';
+  if(btn){btn.textContent='⏳ 提交中…';btn.disabled=true;}
+  var api='https://api.github.com/repos/'+GH_USER+'/'+GH_REPO+'/contents/index.html';
+  fetch(api,{headers:{'Authorization':'Bearer '+tk,'Accept':'application/vnd.github+json'}})
+    .then(function(r){return r.json();})
+    .then(function(j){
+      var body={message:'update via web editor',content:b64};
+      if(j&&j.sha)body.sha=j.sha;
+      return fetch(api,{method:'PUT',headers:{'Authorization':'Bearer '+tk,'Accept':'application/vnd.github+json','Content-Type':'application/json'},body:JSON.stringify(body)});
+    })
+    .then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(){if(btn){btn.textContent='✅ 已发布';}alert('已提交到 GitHub,几秒后 Pages 自动发布。\n刷新 https://'+GH_USER+'.github.io/'+GH_REPO+'/ 即见最新内容。');location.reload();})
+    .catch(function(e){if(btn){btn.textContent=old;btn.disabled=false;}alert('提交失败:'+e.message+'\n(检查网络/密钥,可点「🔑 设置密钥」重设)');});
 }
 ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();
 /* 自动保存:编辑输入 + 结构变化(增删/排序/删列等) */
