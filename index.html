@@ -141,8 +141,33 @@
   <button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff" title="一键双保险:提交 GitHub 上线(他人刷新同链接见最新)+ 下载 HTML 到本机存档">🚀 保存到网站</button>
   <button class="btn-print" onclick="setGHToken()" title="设置 GitHub token(仅存本机浏览器)">🔑 设置密钥</button>
   <button class="btn-print" onclick="window.print()">🖨 打印/PDF</button>
+  <button class="btn-print" onclick="toggleFontPanel()" title="调整全页文字大小与字体;并可清除粘贴格式">🅰 字体</button>
   <button class="btn-print" onclick="clearLocal()" title="清除本机草稿,恢复到发布版">↺ 清除本地保存</button>
   <span id="saveTip" style="font-size:11.5px;color:#27ae60;display:none">草稿已自动存本机</span>
+</div>
+<div id="fontPanel" style="display:none;position:fixed;top:52px;right:14px;z-index:10001;background:#fff;border:1px solid #d0d7e2;border-radius:10px;box-shadow:0 6px 24px rgba(15,23,42,.18);padding:14px 16px;width:250px;font-size:13px;color:#1a1a2e">
+  <div style="font-weight:700;margin-bottom:8px">文字设置(全页)</div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px">
+    <span style="width:56px">文字大小</span>
+    <button onclick="fontStep(-1)" style="width:24px;cursor:pointer">−</button>
+    <b id="fsVal">14</b><span>px</span>
+    <button onclick="fontStep(1)" style="width:24px;cursor:pointer">+</button>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+    <span style="width:56px">字体</span>
+    <select id="fontSel" onchange="applyFont()" style="flex:1;padding:3px">
+      <option value="">默认</option>
+      <option value="'Microsoft YaHei','PingFang SC',sans-serif">微软雅黑</option>
+      <option value="SimSun,serif">宋体</option>
+      <option value="SimHei,sans-serif">黑体</option>
+      <option value="FangSong,STFangsong,serif">仿宋</option>
+      <option value="KaiTi,STKaiti,serif">楷体</option>
+      <option value="Consolas,'Courier New',monospace">等宽</option>
+    </select>
+  </div>
+  <button onclick="stripPastedFormat()" style="width:100%;padding:5px;border:1px solid #c9d4e3;background:#f5f8ff;border-radius:6px;cursor:pointer;margin-bottom:6px">🧹 清除粘贴格式(统一为本页样式)</button>
+  <button onclick="resetFont()" style="width:100%;padding:5px;border:1px solid #ddd;background:#fafafa;border-radius:6px;cursor:pointer">↺ 恢复默认</button>
+  <div style="margin-top:8px;color:#888;font-size:11.5px">设置会保存,发布后对所有人生效</div>
 </div>
 
 <div class="wrap">
@@ -818,6 +843,33 @@ function restoreLocal(){try{var saved=localStorage.getItem(LS_KEY);if(saved){
   }
   return true;}}catch(e){}return false;}
 var _saveT=null;
+/* ---- 全页字体设置 ---- */
+var FS_KEY='hk-csat-font-v1';
+function toggleFontPanel(){var p=document.getElementById('fontPanel');if(p)p.style.display=(p.style.display==='none'||!p.style.display)?'block':'none';}
+function loadFontCfg(){try{return JSON.parse(localStorage.getItem(FS_KEY)||'{}');}catch(e){return {};}}
+function saveFontCfg(c){try{localStorage.setItem(FS_KEY,JSON.stringify(c));}catch(e){}}
+function applyFontCfg(){
+  var c=loadFontCfg();
+  var w=document.querySelector('.wrap');
+  if(w){w.style.fontSize=(c.fs||14)+'px';w.style.fontFamily=c.ff||'';}
+  var v=document.getElementById('fsVal');if(v)v.textContent=c.fs||14;
+  var s=document.getElementById('fontSel');if(s)s.value=c.ff||'';
+}
+function fontStep(d){var c=loadFontCfg();c.fs=Math.min(20,Math.max(11,(c.fs||14)+d));saveFontCfg(c);applyFontCfg();saveLocal();}
+function applyFont(){var c=loadFontCfg();c.ff=document.getElementById('fontSel').value;saveFontCfg(c);applyFontCfg();saveLocal();}
+function resetFont(){saveFontCfg({});applyFontCfg();saveLocal();}
+function stripPastedFormat(){
+  var w=document.querySelector('.wrap');if(!w)return;
+  // 把带 style/font 标签的元素清成统一格式(保留结构)
+  w.querySelectorAll('[style]').forEach(function(el){
+    var s=el.getAttribute('style')||'';
+    // 只清字体相关内联样式,保留布局类(width 等)
+    s=s.replace(/font-(size|family|weight)\s*:[^;"]*;?/gi,'');
+    if(s.trim())el.setAttribute('style',s);else el.removeAttribute('style');
+  });
+  w.querySelectorAll('font,span[face]').forEach(function(el){var p=el.parentNode;while(el.firstChild)p.insertBefore(el.firstChild,el);p.removeChild(el);});
+  applyFontCfg();saveLocal();alert('已清除粘贴的文字格式,统一为本页样式。');
+}
 function saveLocal(){try{var w=document.querySelector('.wrap');if(!w)return;
   var clone=w.cloneNode(true);
   // 只清理动态注入的浮动控件(加载时会重新注入),保留写死在结构里的 del-m/add-m/add-btn 等,确保恢复后编辑功能仍在
@@ -919,7 +971,7 @@ function publishSite(){
     .then(function(){if(btn){btn.textContent='✅ 已发布';}alert('已保存并发布:\n1. 已下载 hk-csat-report.html 到本机(存档);\n2. 已提交 GitHub,约 20 秒后他人刷新 https://'+GH_USER+'.github.io/'+GH_REPO+'/ 即见最新。');location.reload();})
     .catch(function(e){if(btn){btn.textContent=old;btn.disabled=false;}console.error('publish error',e);alert('保存失败: '+e.message+'\n\n排查:\n1. 是否点过「🔑 设置密钥」并粘贴了 token?\n2. token 是否还有效(repo 权限)?\n3. 看浏览器控制台(F12)的红色报错。');});
 }
-ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();ensureCollapsible();
+ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();ensureCollapsible();applyFontCfg();
 /* 自动保存:编辑输入 + 结构变化(增删/排序/删列等) */
 document.addEventListener('input',function(e){if(document.body.classList.contains('edit-on'))saveLocal();});
 (function(){var _b=document.body;_b.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&(t.closest('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.row-tools,.add-foot,.sec-del'))){setTimeout(saveLocal,60);}});})();
