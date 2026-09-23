@@ -133,7 +133,18 @@
   code{background:#eef1f4;padding:1px 5px;border-radius:4px;font-size:11px}
 </style>
 </head>
-<body class="" style="padding-top: 24px;">
+<body class="" style="padding-top: 56px;">
+<div class="toolbar">
+  <span class="ttl">HK 满意度分析报告 · 2026年8月</span>
+  <span class="hint" id="hint">✎ 可直接点文字修改 · 增删问题点/措施/计划行 · 改完点「💾 保存归档」下载文件才是永久保存(跨设备/防丢)</span>
+  <button class="btn-edit" id="btnEdit" onclick="toggleEdit()">✎ 编辑</button>
+  <button class="btn-save" onclick="exportHTML()" title="下载成 HTML 文件,永久保存、可跨设备">💾 保存归档</button>
+  <button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff" title="提交到 GitHub,几秒后自动发布,他人刷新同链接见最新">🚀 保存到网站</button>
+  <button class="btn-print" onclick="setGHToken()" title="设置 GitHub token(仅存本机浏览器)">🔑 设置密钥</button>
+  <button class="btn-print" onclick="window.print()">🖨 打印/PDF</button>
+  <button class="btn-print" onclick="clearLocal()" title="清除本机草稿,恢复到发布版">↺ 清除本地保存</button>
+  <span id="saveTip" style="font-size:11.5px;color:#27ae60;display:none">草稿已自动存本机</span>
+</div>
 
 <div class="wrap">
   <h1 class="ed">HK 满意度分析报告 · 2026 年 8 月</h1>
@@ -791,7 +802,23 @@
 <script>
 /* ---- 本地自动保存(localStorage) ---- */
 var LS_KEY='hk-csat-edit-v1';
-function restoreLocal(){try{var saved=localStorage.getItem(LS_KEY);if(saved){var w=document.querySelector('.wrap');if(w){w.outerHTML=saved;return true;}}}catch(e){}return false;}
+function restoreLocal(){try{var saved=localStorage.getItem(LS_KEY);if(saved){
+  if(saved.indexOf('class="wrap"')<0||saved.indexOf('trend-top')<0){localStorage.removeItem(LS_KEY);return false;}
+  var w=document.querySelector('.wrap');if(w){w.outerHTML=saved;}
+  if(!document.querySelector('.toolbar')){
+    var tb=document.createElement('div');tb.className='toolbar';
+    tb.innerHTML='<span class="ttl">HK 满意度分析报告 · 2026年8月</span>'+
+      '<span class="hint" id="hint">✎ 可直接点文字修改 · 改完点「💾 保存归档」才是永久保存</span>'+
+      '<button class="btn-edit" id="btnEdit" onclick="toggleEdit()">✎ 编辑</button>'+
+      '<button class="btn-save" onclick="exportHTML()">💾 保存归档</button>'+
+      '<button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff">🚀 保存到网站</button>'+
+      '<button class="btn-print" onclick="setGHToken()">🔑 设置密钥</button>'+
+      '<button class="btn-print" onclick="window.print()">🖨 打印/PDF</button>'+
+      '<button class="btn-print" onclick="clearLocal()">↺ 清除本地保存</button>'+
+      '<span id="saveTip" style="font-size:11.5px;color:#27ae60;display:none">草稿已自动存本机</span>';
+    document.body.insertBefore(tb,document.body.firstChild);document.body.style.paddingTop='56px';
+  }
+  return true;}}catch(e){}return false;}
 var _saveT=null;
 function saveLocal(){try{var w=document.querySelector('.wrap');if(!w)return;
   var clone=w.cloneNode(true);
