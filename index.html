@@ -31,7 +31,7 @@
   .cards{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:20px}
   .card{background:#fff;border:1.5px solid #e8e8e8;border-radius:10px;padding:14px 10px;text-align:center}
   .card.warn{border-color:#e34c4c}.card.good{border-color:#27ae60}
-  .card .lbl{font-size:11px;color:#888;margin-bottom:4px}.card .now{font-size:20px;font-weight:700}.card .chg{font-size:11px;margin-top:3px}
+  .card .lbl{font-size:11px;color:#888;margin-bottom:4px}.card .now{font-size:20px;font-weight:700}.card .chg{font-size:11px;margin-top:3px}.card .vol{font-size:11px;color:#666;margin-top:4px;border-top:1px dashed #eee;padding-top:4px}.card .vol b{color:#1a1a2e}
   .red{color:#e34c4c}.grn{color:#27ae60}.gry{color:#888}
   .insight{background:#fffbe6;border-left:4px solid #f0b429;border-radius:0 8px 8px 0;padding:12px 16px;margin-bottom:18px;font-size:13px}.insight b{color:#b7791f}
   .sec{background:var(--surface);border-radius:var(--radius-lg);padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
@@ -159,11 +159,11 @@
       </tbody>
     </table>
     <div class="cards">
-      <div class="card good"><div class="lbl">整体</div><div class="now">90.93%</div><div class="chg grn">▲ +0.72pp</div></div>
-      <div class="card warn"><div class="lbl">交易</div><div class="now">89.75%</div><div class="chg red">▼ −1.21pp</div></div>
-      <div class="card warn"><div class="lbl">活动</div><div class="now">88.39%</div><div class="chg red">▼ −0.43pp</div></div>
-      <div class="card warn"><div class="lbl">资金</div><div class="now">92.16%</div><div class="chg red">▼ −0.52pp</div></div>
-      <div class="card good"><div class="lbl">账户</div><div class="now">92.14%</div><div class="chg grn">▲ +2.61pp</div></div>
+      <div class="card good"><div class="lbl">整体</div><div class="now">90.93%</div><div class="chg grn">▲ +0.72pp</div><div class="vol ed">评价量 <b>7,133</b></div></div>
+      <div class="card warn"><div class="lbl">交易</div><div class="now">89.75%</div><div class="chg red">▼ −1.21pp</div><div class="vol ed">评价量 <b>1,571</b> · 占整体 22.0%</div></div>
+      <div class="card warn"><div class="lbl">活动</div><div class="now">88.39%</div><div class="chg red">▼ −0.43pp</div><div class="vol ed">评价量 <b>534</b> · 占整体 7.5%</div></div>
+      <div class="card warn"><div class="lbl">资金</div><div class="now">92.16%</div><div class="chg red">▼ −0.52pp</div><div class="vol ed">评价量 <b>1,109</b> · 占整体 15.5%</div></div>
+      <div class="card good"><div class="lbl">账户</div><div class="now">92.14%</div><div class="chg grn">▲ +2.61pp</div><div class="vol ed">评价量 <b>1,132</b> · 占整体 15.9%</div></div>
     </div>
   </div>
 
