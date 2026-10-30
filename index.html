@@ -1,8 +1,7 @@
 <!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-<meta charset="utf-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<html lang="zh-Hant"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>HK 满意度分析报告 · 2026年9月</title>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.2/dist/chart.umd.min.js"></script>
 <style>
@@ -130,25 +129,15 @@
   code{background:#eef1f4;padding:1px 5px;border-radius:4px;font-size:11px}
 </style>
 </head>
-<body>
-<div class="toolbar">
-  <span class="ttl">HK 满意度分析报告 · 2026年9月</span>
-  <span class="hint" id="hint">✎ 可直接点文字修改 · 增删问题点/措施/计划行 · 改完点「💾 保存归档」下载文件才是永久保存(跨设备/防丢)</span>
-  <button class="btn-edit" id="btnEdit" onclick="toggleEdit()">✎ 编辑</button>
-  <button class="btn-save" onclick="exportHTML()" title="下载成 HTML 文件,永久保存、可跨设备、我不会覆盖">💾 保存归档</button>
-  <button class="btn-print" onclick="setToken()" style="background:#4747d1;color:#fff;border-color:#4747d1" title="首次发布前先存 GitHub Personal Access Token(repo contents 权限)到本机 localStorage,不会写入公开 HTML">🔑 设置密钥</button>
-  <button class="btn-print" onclick="publishSite()" style="background:#7c3aed;color:#fff;border-color:#7c3aed" title="把当前页面清理成干净 HTML 并 PUT 到 GitHub Pages 仓库,几秒后自动发布,任何人刷新 https://ftftft666.github.io/hk-csat/ 即见最新">🚀 发布上线</button>
-  <button class="btn-print" onclick="window.print()">🖨 打印/PDF</button>
-  <button class="btn-print" onclick="clearLocal()" title="清除本机自动保存,恢复到当前发布版">↺ 清除本地保存</button>
-  <span id="saveTip" style="font-size:11.5px;color:#27ae60;display:none">草稿已自动存本机</span>
-</div>
+<body class="" style="padding-top: 24px;">
+
 <div class="wrap">
   <h1 class="ed">HK 满意度分析报告 · 2026 年 9 月</h1>
   <div class="meta ed">券商主体 = 1.HK ｜ 满意度区间(观远) 2026-09 ｜ 不满意原因数据源:质检系统 result/list · 按【质检时间】2026-09 筛选、【不满意原因】列逐单去重</div>
 
   <div class="trend-top">
     <div class="trend-hd"><h2>满意度趋势（1月 → 9月）</h2><span class="trend-note ed">满意度 = 满意工单 / 评价工单 ｜ 表中小字=该业务评价量占整体评价量比例 ｜ 数据源:观远</span></div>
-    <div class="chart-container"><canvas id="trend"></canvas></div>
+    <div class="chart-container"><canvas id="trend" width="892" height="300" style="display: block; box-sizing: border-box; height: 300px; width: 892px;"></canvas></div>
     <table class="trend-table">
       <thead><tr><th class="cat-col">业务 \ 月份</th><th>1月</th><th>2月</th><th>3月</th><th>4月</th><th>5月</th><th>6月</th><th>7月</th><th>8月</th><th>9月</th></tr></thead>
       <tbody>
@@ -179,278 +168,212 @@
       <div class="cat-box"><div class="cat-num">74</div><div class="cat-name">资金相关</div><div class="cat-pct">10.6%</div></div>
       <div class="cat-box"><div class="cat-num">55</div><div class="cat-name">活动</div><div class="cat-pct">7.9%</div></div>
     </div>
-    <div class="reason-bars" id="rbars"></div>
+    <div class="reason-bars" id="rbars"><div class="rbar-row"><div class="rbar-label">事故</div><div class="rbar-track"><div class="rbar-fill" style="width:100%;background:#C23B2A"></div></div><div class="rbar-val">77</div></div><div class="rbar-row"><div class="rbar-label">交易/订单相关/微型、低价股限制</div><div class="rbar-track"><div class="rbar-fill" style="width:74%;background:#1A5FA8"></div></div><div class="rbar-val">57</div></div><div class="rbar-row"><div class="rbar-label">开户/账户/账户/催修改资料</div><div class="rbar-track"><div class="rbar-fill" style="width:35%;background:#1A5FA8"></div></div><div class="rbar-val">27</div></div><div class="rbar-row"><div class="rbar-label">不满意工单已按灯</div><div class="rbar-track"><div class="rbar-fill" style="width:29%;background:#9A6000"></div></div><div class="rbar-val">22</div></div><div class="rbar-row"><div class="rbar-label">可提升工单（-3到-8分）/7：需不满意回访</div><div class="rbar-track"><div class="rbar-fill" style="width:25%;background:#9A6000"></div></div><div class="rbar-val">19</div></div><div class="rbar-row"><div class="rbar-label">开户/账户/开户/开户被驳回/补开户资料</div><div class="rbar-track"><div class="rbar-fill" style="width:17%;background:#1A5FA8"></div></div><div class="rbar-val">13</div></div><div class="rbar-row"><div class="rbar-label">交易/订单相关/下单失败、报错</div><div class="rbar-track"><div class="rbar-fill" style="width:16%;background:#1A5FA8"></div></div><div class="rbar-val">12</div></div><div class="rbar-row"><div class="rbar-label">开户/账户/账户/催账户解除交易限制</div><div class="rbar-track"><div class="rbar-fill" style="width:14%;background:#1A5FA8"></div></div><div class="rbar-val">11</div></div><div class="rbar-row"><div class="rbar-label">资金相关/催出金/未超时催普通出金</div><div class="rbar-track"><div class="rbar-fill" style="width:13%;background:#1D7A5A"></div></div><div class="rbar-val">10</div></div><div class="rbar-row"><div class="rbar-label">转仓/催转出</div><div class="rbar-track"><div class="rbar-fill" style="width:13%;background:#1A5FA8"></div></div><div class="rbar-val">10</div></div><div class="rbar-row"><div class="rbar-label">客服系统/流程/催回复</div><div class="rbar-track"><div class="rbar-fill" style="width:13%;background:#C23B2A"></div></div><div class="rbar-val">10</div></div><div class="rbar-row"><div class="rbar-label">资金相关/催入金/未超时</div><div class="rbar-track"><div class="rbar-fill" style="width:13%;background:#1D7A5A"></div></div><div class="rbar-val">10</div></div><div class="rbar-row"><div class="rbar-label">人员服务相关/人员有效不满/解答错误/漏解答/不完整</div><div class="rbar-track"><div class="rbar-fill" style="width:12%;background:#C23B2A"></div></div><div class="rbar-val">9</div></div><div class="rbar-row"><div class="rbar-label">交易/资产分析/不清楚/不满资产分析逻辑</div><div class="rbar-track"><div class="rbar-fill" style="width:10%;background:#1A5FA8"></div></div><div class="rbar-val">8</div></div></div>
   </div>
 
   <div class="sec" id="sec-acct">
     <div class="sec-hd"><h2 class="ed">一、开户 / 账户</h2><span class="badge b-grn ed">不满意 81 单</span>
       <span class="sec-sat"><span class="v">92.14%</span><span class="p grn">▲ +2.61pp</span><span class="gry" style="font-size:12px">上月 89.53%(升幅最大)</span></span></div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">27 单</span></h3>
-      <ul class="qsum ed"><li><b>催修改资料</b>:身份证有效期与证件图片不符、地址与证件不一致被驳回,客户反复催审核(CDD 驳回导致不满、地址证明被多次驳回)</li><li><b>无法修改资料</b>:不清楚应提交哪种证件、误操作提交需驳回重改</li></ul>
+    <div class="blk">
+      <h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">31 单</span></h3>
+      <ul class="qsum ed"><li><b>催修改资料</b>: 身份证有效期与证件图片不符、地址与证件不一致被驳回, 客户反复催审核(CDD 驳回导致不满、地址证明被多次驳回)</li><li><b>无法修改资料</b>: 不清楚应提交哪种证件、误操作提交需驳回重改</li></ul>
       <div class="measures">
         <div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div>
-          <div class="mdesc ed">驳回时明确原因 + 所需证件清单 + 范例;开放自助修改指引;设 SLA 与进度可查,超时自动升级。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-BuoYdRgn9oB81Rxdojcc3XoEnWg">CDD工单处理系统优化</div></div></span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-BuoYdRgn9oB81Rxdojcc3XoEnWg">审核处理工单时为随机领取，不支持按客户提交时间先后派发，没有工单处理超时提醒。--CDD资料审核系统迭代，随机选择领取工单模式优化为派单模式，一单到底，限制“挑单”行为</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;审核处理工单时为随机领取，不支持按客户提交时间先后派发，没有工单处理超时提醒。--CDD资料审核系统迭代，随机选择领取工单模式优化为派单模式，一单到底，限制“挑单”行为&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+2c&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;a0167434-b518-4d82-bc85-495a54a3064e&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1005,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:10,&quot;end&quot;:94},&quot;recordId&quot;:&quot;BuoYdRgn9oB81Rxdojcc3XoEnWg&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          
+        <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;yunasun 、kaylalin  预计11月中旬测试，11月底上线使用&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+11&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;22c7cb14-86fd-4428-b8fa-5214eb49ae00&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1005,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:99,&quot;end&quot;:136},&quot;recordId&quot;:&quot;BuoYdRgn9oB81Rxdojcc3XoEnWg&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">yunasun 、kaylalin  预计11月中旬</span><span style="color: rgb(46, 161, 33);">测试</span><span style="color: rgb(46, 161, 33);">，11月底上线使用</span></span></div></div>
+        <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-W2DAdWOIqoNJgRxKqjDca52cnRe">CDD工单审核流程</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;CDD工单审核&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+7&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;c5bad6db-e67f-416e-8c78-25821d5d3f39&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1006,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:7},&quot;recordId&quot;:&quot;W2DAdWOIqoNJgRxKqjDca52cnRe&quot;}],&quot;payloadMap&quot;:{&quot;lingoClipboardPayload&quot;:{&quot;spaceSubExtraInfo&quot;:[{&quot;spaceSubId&quot;:&quot;W2DAdWOIqoNJgRxKqjDca52cnRe&quot;,&quot;word&quot;:&quot;CDD&quot;}],&quot;spaceId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;spaceType&quot;:1}},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></span></div><div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-W2DAdWOIqoNJgRxKqjDca52cnRe">1、可能人员存在“挑单”的行为，系统无法记录或限制，导致部分工单被延时处理。--新增多次驳回工单的回访协助机制，主动服务，减少多次驳回引起的不满意</div><div class=" old-record-id-W2DAdWOIqoNJgRxKqjDca52cnRe">2、驳回后提交处理人员随机重新分配，不是一跟到底，审核员之间--初审与中台终审之间--中台终审与中台终审之间的审核标准不一致导致多次驳回。--专项质检中，后续会安排案例分析</div><div class=" old-record-id-W2DAdWOIqoNJgRxKqjDca52cnRe">3、驳回原因描述不够详细，机械化多次驳回&nbsp;</div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;驳回原因描述不够详细，机械化多次驳回&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+i&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;98948860-0a3f-4a68-8f0d-0510cd245643&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1009,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:18},&quot;recordId&quot;:&quot;NATudZXdtoCStVx5lWUcccBsnQD&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;驳回后提交处理人员随机重新分配，不是一跟到底，审核员之间--初审与中台终审之间--中台终审与中台终审之间的审核标准不一致导致多次驳回。--专项质检中，后续会安排案例分析&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+2c&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;6369a3b7-3815-4649-85d1-84e757dcc17c&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1007,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:7,&quot;end&quot;:91},&quot;recordId&quot;:&quot;BsTndxsEDodE8PxsQdKcMkjDnFx&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;可能人员存在“挑单”的行为，系统无法记录或限制，导致部分工单被延时处理。--新增多次驳回工单的回访协助机制，主动服务，减少多次驳回引起的不满意&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1z&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;4d8ee92d-3412-41fa-b57b-fcd642eac81c&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1006,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:8,&quot;end&quot;:79},&quot;recordId&quot;:&quot;W2DAdWOIqoNJgRxKqjDca52cnRe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;alex 、kaylalin  待新系统上线后确定流程，预计12月初完成&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+10&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;3c9f431f-344d-4d93-9449-af6aae124fa0&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1006,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:85,&quot;end&quot;:121},&quot;recordId&quot;:&quot;W2DAdWOIqoNJgRxKqjDca52cnRe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">alex 、kaylalin  待新系统上线后确定流程，11月</span><span style="color: rgb(46, 161, 33);">会同步优化驳回原因选项功能，回访协助机制</span><span style="color: rgb(46, 161, 33);">预计12月初完成</span></span></div></div>
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题2 · 开户被驳回 / 补开户资料 <span class="cnt ed">13 单</span></h3>
       <ul class="qsum ed"><li>地址证明不一致多次被驳回、需补交英文地址证明</li><li>手机号已注册无法重新申请开户、单位名称非全称被驳回不满</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div>
-          <div class="mdesc ed">复盘高频驳回原因,优化驳回文案与驳回项,预计上线。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回流程</span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-GiImdMs5doGwvzx02Bfcu31mnPb">开户驳回原因描述不清晰，仍有优化空间，驳回系统固定项与自定义项无法同时选择，影响审核驳回描述操作。</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;开户驳回原因描述不清晰，仍有优化空间，驳回系统固定项与自定义项无法同时选择，影响审核驳回描述操作。&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1d&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;0c5879f1-99be-4356-9903-f53f5caffcbe&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1012,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:49},&quot;recordId&quot;:&quot;GiImdMs5doGwvzx02Bfcu31mnPb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          <div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed"><span style="color: rgb(46, 161, 33); font-size: 11.5px;">待排期</span></span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;sissiguo、kaylali 待排期&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+k&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;f47704ba-d964-4958-a3de-2ef702c542f9&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1012,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:54,&quot;end&quot;:74},&quot;recordId&quot;:&quot;GiImdMs5doGwvzx02Bfcu31mnPb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">sissiguo、kaylali&nbsp;</span></span></div>
         </div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">HK 证件识别能力优化 + 地址证明识别</span></div>
-          <div class="mdesc ed">证件前置判断(模糊/反光),减少因识别问题反复被驳回。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">前端说明优化</span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UBPwdZrTFocNndxu1lEc1ozOnKe">地址证明不符合被驳回是总开户驳回的主要原因，其中不支持酒店/服务式公寓/商业住址，前端未有相关说明</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;地址证明不符合被驳回是总开户驳回的主要原因，其中不支持酒店/服务式公寓/商业住址，前端未有相关说明&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1d&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;2a53314e-c98c-400c-8466-d8c6614d55d5&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1013,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:49},&quot;recordId&quot;:&quot;UBPwdZrTFocNndxu1lEc1ozOnKe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          <div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed"><span style="color: rgb(46, 161, 33); font-size: 11.5px;">待排期</span></span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;yunasun、kaylalin&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+g&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;bb7c1eaf-9d6d-4103-97cd-46f6918a1196&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1013,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:55,&quot;end&quot;:71},&quot;recordId&quot;:&quot;UBPwdZrTFocNndxu1lEc1ozOnKe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">yunasun、kaylalin</span></span></div>
         </div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">地址证明不支持酒店/服务式住宅/商业地址导致被驳回</span></div>
-          <div class="mdesc ed">开户页前端及官网增加说明,待紧急事项后评估。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">AI审核系统</span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-LfYqdMQ88owuDGx9ODnc0t7bnwd">AI审核，加快部分符合要求工单的审核时长：在AI审核达到质检、合规、审核等预期的情况下,实现AI自动通过部分低风险工单</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;AI审核，加快部分符合要求工单的审核时长：在AI审核达到质检、合规、审核等预期的情况下,实现AI自动通过部分低风险工单&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1n&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;24afa5fc-ce3d-47e5-be8d-00e044bc5cdd&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1015,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:9,&quot;end&quot;:68},&quot;recordId&quot;:&quot;LfYqdMQ88owuDGx9ODnc0t7bnwd&quot;}],&quot;payloadMap&quot;:{&quot;lingoClipboardPayload&quot;:{&quot;spaceSubExtraInfo&quot;:[{&quot;spaceSubId&quot;:&quot;LfYqdMQ88owuDGx9ODnc0t7bnwd&quot;,&quot;word&quot;:&quot;AI&quot;}],&quot;spaceId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;spaceType&quot;:1}},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          <div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;apengxuzhu、kaylalin 预计27年Q1上线&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+t&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;25e7cc31-e854-4d84-8b05-d6ee592a847b&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1015,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:75,&quot;end&quot;:104},&quot;recordId&quot;:&quot;LfYqdMQ88owuDGx9ODnc0t7bnwd&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">apengxuzhu、kaylalin 预计27年Q1上线</span></span></div>
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题3 · 催账户解除交易限制 <span class="cnt ed">11 单</span></h3>
       <ul class="qsum ed"><li>账户中等限制不满、无具体可解封时间</li><li>行政原因账户被限制,多次催办要求转值班经理</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">限制类工单时效与主动告知</span></div>
-          <div class="mdesc ed">主动告知预计解除时间,行政/敏感限制话术标准化,快速升级值班经理。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+      <div class="measures empty"><div class="mlabel">措施</div>
+        
+        
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">问题4 · 税务相关 8 · 账户信息 8 · 催办类(升级/补开/PI) <span class="cnt ed">约 25 单</span></h3>
+    <div class="blk">
+      <h3 class="ed">问题4 · 税务相关&nbsp; · 账户信息&nbsp; · 催办类(升级/补开/PI) <span class="cnt ed">约 13单</span></h3>
       <ul class="qsum ed"><li>催开户/账户升级/补开户/PI 认证进度,审核超时反复催办</li><li>税务(W8/CRS)与账户信息类咨询,规则/填写不清</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">开户/升级/PI 进度可视化</span></div>
-          <div class="mdesc ed">进度节点可视化 + 关键节点主动短信通知;税务类问题沉淀标准解答。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+      <div class="measures empty"><div class="mlabel">措施</div>
+        
+        
       </div>
     </div>
-    <button class="add-btn" onclick="addBlk('sec-acct')">+ 新增问题点</button>
+    
   </div>
 
   <div class="sec" id="sec-trade">
-    <div class="sec-hd"><h2 class="ed">二、交易</h2><span class="badge b-red ed">不满意 155 单(最多)</span>
+    <div class="sec-hd"><h2 class="ed">二、交易</h2><span class="badge b-red ed">不满意 155 单</span>
       <span class="sec-sat"><span class="v">89.75%</span><span class="p red">▼ −1.21pp</span><span class="gry" style="font-size:12px">上月 92.55%(唯一下滑)</span></span></div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题1 · 微型、低价股限制(碎股/OTC) <span class="cnt ed">57 单</span></h3>
-      <ul class="qsum ed"><li>微型/低价股、碎股开仓与成交受限</li><li>暂不支持 F 字尾 OTC 股票交易,受限缺少下单前置提示(如 TCRT 卖出提示操作失败)</li></ul>
+      <ul class="qsum ed"><li>微型/低价股、碎股开仓与成交受限</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">受限标的下单前置提示</span></div>
-          <div class="mdesc ed">前置规则与原因提示,给出替代路径;整理"不支持交易品类"清单供客服一键发送;公司行动期下单限制主动告知。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
+        <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed"><br></span></div><div class="mdesc ed">已确认无法进一步优化<div>1、微型低价股名单不定期变动，前端无法展示完整名单列表&nbsp;</div><div>2、目前客户如遇到价格无法下单，可于交易群内反馈交易员回访下单</div></div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">暂不优化</span></span><span class="owner ed">负责人：quentin 已评估</span></div></div>
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题2 · 下单失败、报错 <span class="cnt ed">12 单</span></h3>
-      <ul class="qsum ed"><li>卖出提示操作失败(上游/交易所网络中断)、PI 认证状态未实时更新无法交易比特币 ETF、OTCX 系统故障订单被撤销</li><li>风控/购买力致下单失败</li></ul>
+      <ul class="qsum ed"><li>下单失败前端不展示具体原因，导致客户需要排队进入人工咨询</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">下单失败原因文案 + 成交/撤单展示</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">前端展示下单失败原因，梳理文案</span></div>
           <div class="mdesc ed">给明确原因(风控/购买力/上游/公司行动);成交/撤单历史清晰化(含部分成交、上游撤单)+ 下单留痕。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+          
+        <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待评估</span></span><span class="owner ed">负责人：lucasli、evelynzhang</span></div></div>
+        
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题3 · 资产分析逻辑不满 / 觉得少了钱 <span class="cnt ed">8 单</span></h3>
-      <ul class="qsum ed"><li>认为买入看涨期权多扣资金、资产分析逻辑不清</li><li>客服仅回复计算公式未定位差额</li></ul>
+      <ul class="qsum ed"><li>客户主动认为买入看涨期权多扣资金、资产分析逻辑不清</li><li>客服仅回复计算公式未定位差额</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">总资产差额说明入口 + 排查 SOP</span></div>
-          <div class="mdesc ed">加"总资产构成/差额说明"入口;客服建总资产异议排查 SOP(汇率、夜盘价、未交收、费用)。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">AI 产品化</span></div>
+          <div class="mdesc ed"><div data-lark-html-role="root"><span class="text-only" style="white-space: pre;">尝试搭建相关工具以便客服使用</span></div></div>
+          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待评估</span></span><span class="owner ed">负责人：jakeyli</span></div>
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">问题4 · 融资被扣利息 6 · 否认下单 6 · 行权规则 6 <span class="cnt ed">约 18 单</span></h3>
-      <ul class="qsum ed"><li>不清楚已使用融资被扣利息(融资利息计算 360/365 口径一二线不一致)</li><li>否认下单、组合期权单腿平仓提示保证金危险,行权规则不清</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">融资利息前置提醒</span></div>
-          <div class="mdesc ed">产生利息前主动提醒;交易页展示融资占用与预估利息。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">融资利息口径统一</span></div>
-          <div class="mdesc ed">统一计算口径(360/365),补充查询路径标准话术。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
-      </div>
-    </div>
-    <button class="add-btn" onclick="addBlk('sec-trade')">+ 新增问题点</button>
+    
+    
   </div>
 
   <div class="sec" id="sec-fund">
     <div class="sec-hd"><h2 class="ed">三、资金相关</h2><span class="badge b-org ed">不满意 74 单</span>
       <span class="sec-sat"><span class="v">92.16%</span><span class="p red">▼ −0.52pp</span><span class="gry" style="font-size:12px">上月 92.68%</span></span></div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">问题1 · 未超时催普通出金 10 · 催入金 10 <span class="cnt ed">20 单</span></h3>
-      <ul class="qsum ed"><li>未超时即催出/入金,觉得到账时效太久</li><li>账户有欠款及空头期权无现金可提,出金需 HKD 代理银行资料;FPS 入金需人工处理、ATM 入金驳回补充凭证不满</li></ul>
+    <div class="blk">
+      <h3 class="ed">问题1 · 未超时催普通出入金&nbsp;<span class="cnt ed">20 单</span></h3>
+      <ul class="qsum ed"><li>未超时即催出/入金，觉得到账时效太久</li><li>账户有欠款及空头期权无现金可提；FPS 入金需人工处理</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可查 + 主动推送</span></div>
-          <div class="mdesc ed">出/入金进度与预计到账可查、主动推送状态;可提金额区分"未交收/可提"并解释交收规则。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可催促</span></div>
+          <div class="mdesc ed">出金进度前端已增加催促功能 ; Q2出金时效已提升，短期内不会再次优化</div>
+          
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题2 · 入金问题(凭证/渠道/页面异常) <span class="cnt ed">约 10 单</span></h3>
-      <ul class="qsum ed"><li>汇款与绑定不一致导致无法入金</li><li>ATM 入金不提供转账凭证,第三方入金不支持;客服受理口径错误</li></ul>
+      <ul class="qsum ed"><li>汇款与绑定不一致导致无法入金</li><li>ATM 入金不提供转账凭证 , 第三方入金不支持;&nbsp;</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">入金指引 + 受理口径纠错</span></div>
-          <div class="mdesc ed">入金页按渠道给分步指引与凭证要求;更新受理银行/币种知识库,纠正客服错误口径。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">入金指引</span></div>
+          <div class="mdesc ed">入金页已按渠道给分步指引与凭证要求&nbsp;</div>
+          
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
-    <button class="add-btn" onclick="addBlk('sec-fund')">+ 新增问题点</button>
+    
   </div>
 
   <div class="sec" id="sec-act">
     <div class="sec-hd"><h2 class="ed">四、活动</h2><span class="badge b-grn ed">不满意 55 单</span>
       <span class="sec-sat"><span class="v">88.39%</span><span class="p red">▼ −0.43pp</span><span class="gry" style="font-size:12px">上月 88.82%</span></span></div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题1 · 催奖励发放 / 活动规则不清晰 <span class="cnt ed">约 22 单</span></h3>
       <ul class="qsum ed"><li>KOL 地推新客活动催奖励发放</li><li>NUP 期权新客活动因出金/股票跌值导致维持资产不足、奖励失效;奖励未选择领取使用导致过期失效,客服未先查参与/入金状态</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">活动规则前置说明 + 奖励时效</span></div>
-          <div class="mdesc ed">活动规则(门槛/时限/奖励)在参与入口显著说明;奖励发放设时效与进度查询、超时自动跟进。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        <div class="measure">
+          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class="ace-line ace-line old-record-id-Ezp9dOLgroEH6gxrovEcoYxEnXd">活动客诉流程优化-- 业务侧重复性人工发奖 --&gt; 规范化自动发奖</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;活动客诉流程优化-- 业务侧重复性人工发奖 --&gt; 规范化自动发奖&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+x&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:true,&quot;pasteRandomId&quot;:&quot;1e49aa07-bb42-41af-a606-312d4a50bb67&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1041,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:33},&quot;recordId&quot;:&quot;Ezp9dOLgroEH6gxrovEcoYxEnXd&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-Gj8ldYvWzo5WgPxHlSzcWfYlnzb">目前还没有从工单到人工提交发奖这里做打通，由于承接客户工单的是上游系统，比较建议客服判断需要给到客户发奖时，发起审批流， 审批流通过后，上游工单系统可以调用活动人工发奖的接口自动发奖；</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;目前还没有从工单到人工提交发奖这里做打通，由于承接客户工单的是上游系统，比较建议客服判断需要给到客户发奖时，发起审批流， 审批流通过后，上游工单系统可以调用活动人工发奖的接口自动发奖；&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+2k&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;20d714cb-19bf-44d5-9749-6e807fb7ebd4&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1042,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:92},&quot;recordId&quot;:&quot;Gj8ldYvWzo5WgPxHlSzcWfYlnzb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          
+        <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;mavisliu 、shimonyang&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+k&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;1e5e7d8a-dbfc-46ff-a682-c174e3c7fb0c&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1042,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:97,&quot;end&quot;:117},&quot;recordId&quot;:&quot;Gj8ldYvWzo5WgPxHlSzcWfYlnzb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">mavisliu 、shimonyang</span></span></div></div>
+        <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">错过转仓活动</span></div><div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-ZUccdICkAoUzFqxwsDHc54uinwh">发起指令后才发现有转仓活动，错过参与活动--对符合活动对象条件的客户，在进入app转入页面的时候，增加弹窗介绍转仓活动</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;发起指令后才发现有转仓活动，错过参与活动--对符合活动对象条件的客户，在进入app转入页面的时候，增加弹窗介绍转仓活动&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1n&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;609c56b5-0af3-4253-92b2-f573c0c4333b&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1047,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:59},&quot;recordId&quot;:&quot;ZUccdICkAoUzFqxwsDHc54uinwh&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">搁置</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;nikkiliu、shimonyang 10/15 评估结果：成本控制，暂不优化&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+q*0*2*1+e&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;],&quot;2&quot;:[&quot;bold&quot;,&quot;true&quot;]},&quot;nextNum&quot;:3,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1,&quot;bold,true&quot;:2}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;35e740ca-1593-4f46-a5eb-d3a11f52b0a7&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1047,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:65,&quot;end&quot;:105},&quot;recordId&quot;:&quot;ZUccdICkAoUzFqxwsDHc54uinwh&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">nikkiliu、shimonyang 10/15 </span><span style="color: rgb(46, 161, 33);"><strong>评估</strong></span><span style="color: rgb(46, 161, 33);"><strong>结果：成本控制，暂不优化</strong></span></span></div></div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class="ace-line ace-line old-record-id-Ax8QdOj1woOLjkxtEv2cav2Snid">邀请活动奖励过期</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;邀请活动&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+4&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:true,&quot;pasteRandomId&quot;:&quot;c9f512bd-a000-4883-bfbc-b5b3224831e8&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1049,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:4},&quot;recordId&quot;:&quot;Ax8QdOj1woOLjkxtEv2cav2Snid&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></span></div><div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UxK7deuJVoLW7BxQamncHEtcnwh">1、奖励过期，发放到账没有通知，只有到期提醒：现金券到期前三天会发通知</div><div class=" old-record-id-UxK7deuJVoLW7BxQamncHEtcnwh">2、被邀请人已参加其他活动与该活动冲突：建议在前端邀请人邀请时或被邀请人点击邀请链接有弹窗提醒告知不符合参与推荐活动字眼</div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;被邀请人已参加其他活动与该活动冲突：建议在前端邀请人邀请时或被邀请人点击邀请链接有弹窗提醒告知不符合参与推荐活动字眼&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1m&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;ef47a307-7d3d-4e4c-9950-6dc35a8c808a&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1051,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:58},&quot;recordId&quot;:&quot;P2zwd5VSEoPL4YxpeYIcOc9Bn3g&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;奖励过期，发放到账没有通知，只有到期提醒：现金券到期前三天会发通知&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+x&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;fd669cab-0ec9-42ca-a425-a25ac4864255&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1050,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:33},&quot;recordId&quot;:&quot;UxK7deuJVoLW7BxQamncHEtcnwh&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span style="color: rgb(46, 161, 33);">alisonchen 10/15 </span><span style="color: rgb(46, 161, 33);"><strong>评估</strong></span><span style="color: rgb(46, 161, 33);"><strong>结果：暂不优化</strong></span></span></div></div>
       </div>
     </div>
 
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="blk">
       <h3 class="ed">问题2 · 开户后无法补填兑换码 <span class="cnt ed">约 9 单</span></h3>
       <ul class="qsum ed"><li>开户前未输入 MH 等兑换码,开户成功后无法补填,导致无法获得奖励</li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
+        <div class="measure">
           <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户后限期补填兑换码</span></div>
-          <div class="mdesc ed">开户流程内提示兑换码填写时机;支持开户后限期补填或客服后台补录。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
+          <div class="mdesc ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UR7zdHvsFoN0PPxLmFfcaORvnTe">后期可在推广页面自动绑定兑换码 ：moneysmart 单渠道优化</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;后期可在推广页面自动绑定兑换码 ：moneysmart单渠道&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+u&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;8470c5e1-37cd-4b71-8df1-1eba581795af&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1045,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:8,&quot;end&quot;:38},&quot;recordId&quot;:&quot;UR7zdHvsFoN0PPxLmFfcaORvnTe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></div>
+          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;eddiepeng、shimonyang 跟进中）&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0*1+p&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;],&quot;1&quot;:[&quot;textHighlight&quot;,&quot;rgb(46,161,33)&quot;]},&quot;nextNum&quot;:2,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0,&quot;textHighlight,rgb(46,161,33)&quot;:1}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;83a1ecf8-5174-49cd-94d3-72111c124dbb&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1045,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:70,&quot;end&quot;:95},&quot;recordId&quot;:&quot;UR7zdHvsFoN0PPxLmFfcaORvnTe&quot;},{&quot;id&quot;:1046,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:0},&quot;recordId&quot;:&quot;PZt4dIlnToaVn6xAwYacLZKDnLf&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span><span style="color: rgb(46, 161, 33);">eddiepeng、shimonyang&nbsp;</span>11月各渠道陆续上线、预计11/2起全量开始切换上线<span style="color: rgb(46, 161, 33);">）</span></span></div>
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
-    <button class="add-btn" onclick="addBlk('sec-act')">+ 新增问题点</button>
+    
   </div>
 
-  <div class="sec" id="sec-other">
-    <div class="sec-hd"><h2 class="ed">五、其他高频原因</h2><span class="badge b-gry ed">平台35/客服25/行情22/财富18/营销20/公司行动19/销户17/转仓12 等</span></div>
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">平台基础体验 35 · 客服系统/流程 25 · 行情 22 <span class="cnt ed">82 单</span></h3>
-      <ul class="qsum ed"><li><b>平台</b>:收不到验证码、登录异常、OpenAPI 策略检查规则不满(等比网格策略原价买卖几秒内成交,觉得网格不智能)</li><li><b>客服</b>:催回复、客户主动结束会话、认为泄露客户账户信息多次咨询不满</li><li><b>行情</b>:加载异常、不熟悉行情功能、行情功能不满</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">登录验证 & 人工接入优化 + 网格策略</span></div>
-          <div class="mdesc ed">优化短信验证码到达与登录异常,缩短人工接入等待、防掉线,网格策略规则说明前置,行情功能与权限说明前置。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
-      </div>
-    </div>
-    <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">财富管理 18 · 人员服务 8 · 销户 17 · 转仓 12 · 用户营销 20 · 公司行动 19 <span class="cnt ed">约 94 单</span></h3>
-      <ul class="qsum ed"><li><b>人员服务</b>:解答错误/漏解答/不完整(漏解答开户资料问题、客服业务不熟告知没有 moomoo NZ 后纠正)</li><li><b>销户/转仓</b>:不能线上销户需重开、催转出(催提取实物股票)</li><li><b>财富/营销</b>:基金赎回、商城商品质量、公司行动咨询</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">高频疑难标准解答 + 线上销户评估</span></div>
-          <div class="mdesc ed">高频疑难(资产分析、期权行权、债券)沉淀标准解答并强化质检抽检;评估线上销户能力;转出进度可查。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
-      </div>
-    </div>
-    <button class="add-btn" onclick="addBlk('sec-other')">+ 新增问题点</button>
-  </div>
+  
 
   <div class="sec" id="sec-incident">
-    <div class="sec-hd"><h2 class="ed">六、事故 / 敏感外汇政策(专项)</h2><span class="badge b-new ed">事故 77 · 敏感外汇 2</span></div>
-    <div class="blk new"><button class="del-btn" onclick="delBlk(this)">×</button>
+    <div class="sec-hd"><h2 class="ed">五、事故 / 敏感外汇政策(专项)</h2><span class="badge b-new ed">事故 77&nbsp;</span></div>
+    <div class="blk new">
       <h3 class="ed">事故(跨业务) <span class="cnt ed">77 单</span></h3>
       <ul class="qsum ed"><li>系统异常/响应超时,如「牛牛惊喜活动异常显示已结束」、客户反馈账户异常无反应(资产/持仓页面异常事故),客服未操作登记反馈至事故表格</li><li>客户不满表示"只抱歉不赔偿"。<b>事故 77 单(8月仅20单,环比显著上升,为重点异动)</b></li></ul>
       <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
+        <div class="measure">
           <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">维护窗口公告 + 降级体验 + 事故登记闭环</span></div>
           <div class="mdesc ed">维护窗口提前公告+app 内提示,异常统一话术与补偿口径,客服事故登记反馈闭环(结束会话后须操作登记反馈至事故表)。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
+          
         </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+        
       </div>
     </div>
-    <div class="blk new"><button class="del-btn" onclick="delBlk(this)">×</button>
-      <h3 class="ed">敏感外汇政策(货币兑换 2) <span class="cnt ed">2 单</span></h3>
-      <ul class="qsum ed"><li>敏感外汇政策相关咨询不满、货币兑换操作不清</li></ul>
-      <div class="measures"><div class="mlabel">措施</div>
-        <div class="measure"><span class="del-m" onclick="delM(this)">删除</span>
-          <div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ + 舆情话术</span></div>
-          <div class="mdesc ed">制定内地合规/外汇政策统一口径与 FAQ,货币兑换操作前置指引,舆情敏感期设专项话术与升级通道。</div>
-          <div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div>
-        </div>
-        <button class="add-m" onclick="addM(this)">+ 新增措施</button>
-      </div>
-    </div>
-    <button class="add-btn" onclick="addBlk('sec-incident')">+ 新增问题点</button>
+    
+    
   </div>
 
   <!-- 下期工作计划 -->
   <div class="sec plan" id="sec-plan">
     <div class="sec-hd"><h2 class="ed">下期工作计划</h2><span class="badge b-gry ed">优化问题点 + 跟进措施</span></div>
     <table id="planTable">
-      <thead><tr><th class="ed" style="width:24%">优化问题点</th><th class="ed" style="width:40%">跟进措施</th><th class="ed" style="width:15%">负责人</th><th class="ed" style="width:13%">进度</th></tr></thead>
+      <thead><tr><th class="ed" style="width: 173px;">优化问题点</th><th class="ed" style="width: 369px;">跟进措施</th><th class="ed" style="width: 182px;">负责人</th><th class="ed" style="width: 158px;">进度</th></tr></thead>
       <tbody id="planBody">
-        <tr><td class="ed">微型/低价股·OTC 下单限制(57)</td><td class="ed">受限标的前置规则提示、替代路径、不支持品类清单</td><td class="ed">待指派</td><td class="ed">待启动</td></tr>
-        <tr><td class="ed">事故专项(77,环比+57)</td><td class="ed">维护窗口公告降级体验、事故登记反馈闭环、补偿口径</td><td class="ed">待指派</td><td class="ed">待启动</td></tr>
-        <tr><td class="ed">资料修改反复被驳回(27)</td><td class="ed">优化驳回文案与证件清单、开放自助修改指引</td><td class="ed">待指派</td><td class="ed">待启动</td></tr>
-        <tr><td class="ed">开户被驳回·地址证明(13)</td><td class="ed">材料清单前置、证件/地址证明识别优化</td><td class="ed">待指派</td><td class="ed">进行中</td></tr>
-        <tr><td class="ed">出/入金催办与入金口径</td><td class="ed">出入金进度可查、入金指引、纠正客服受理口径</td><td class="ed">待指派</td><td class="ed">待启动</td></tr>
-        <tr><td class="ed">交易资产分析/融资利息(8+12)</td><td class="ed">总资产差额说明入口、融资利息前置提醒+口径统一</td><td class="ed">待指派</td><td class="ed">待启动</td></tr>
-      </tbody>
+        <tr><td class="ed">活动客诉流程优化</td><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-Ezp9dOLgroEH6gxrovEcoYxEnXd">规范化自动发奖</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;规范化自动发奖&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+7&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;be32b43c-9fac-4ab5-b44a-744647a81a7a&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1041,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:26,&quot;end&quot;:33},&quot;recordId&quot;:&quot;Ezp9dOLgroEH6gxrovEcoYxEnXd&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">mavisliu、shimonyang</div></td><td class="ed">跟进中</td></tr>
+        
+        <tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class="ace-line ace-line old-record-id-PMd2dAANEoaVEUx7w6mcSTwUnIc">KOL活动未绑定兑换码</div></div><span data-lark-record-data="{&quot;isCut&quot;:false,&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;parentId&quot;:&quot;HOZ3dVQFfox3IUxDdgwc1JWonRf&quot;,&quot;blockIds&quot;:[1044],&quot;recordIds&quot;:[&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;],&quot;recordMap&quot;:{&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;:{&quot;id&quot;:&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;,&quot;snapshot&quot;:{&quot;align&quot;:&quot;&quot;,&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7143506482208702492&quot;,&quot;text&quot;:{&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}},&quot;initialAttributedTexts&quot;:{&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+5&quot;},&quot;text&quot;:{&quot;0&quot;:&quot;KOL活动&quot;}}},&quot;children&quot;:[],&quot;folded&quot;:false,&quot;type&quot;:&quot;text&quot;,&quot;parent_id&quot;:&quot;HOZ3dVQFfox3IUxDdgwc1JWonRf&quot;,&quot;comments&quot;:[],&quot;revisions&quot;:[]}},&quot;HOZ3dVQFfox3IUxDdgwc1JWonRf&quot;:{&quot;id&quot;:&quot;HOZ3dVQFfox3IUxDdgwc1JWonRf&quot;,&quot;snapshot&quot;:{&quot;comments&quot;:[],&quot;revisions&quot;:[],&quot;locked&quot;:false,&quot;hidden&quot;:false,&quot;author&quot;:&quot;7143506482208702492&quot;,&quot;children&quot;:[&quot;U5qMdhaXhoD3j9xRpeycC7FwnWh&quot;,&quot;Ezp9dOLgroEH6gxrovEcoYxEnXd&quot;,&quot;Gj8ldYvWzo5WgPxHlSzcWfYlnzb&quot;,&quot;CrjKdqXeRodLJtx4KNhcRR5VnKb&quot;,&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;,&quot;UR7zdHvsFoN0PPxLmFfcaORvnTe&quot;,&quot;PZt4dIlnToaVn6xAwYacLZKDnLf&quot;,&quot;ZUccdICkAoUzFqxwsDHc54uinwh&quot;,&quot;IWqLdJtBoohsJ1xsNlQcSyYGn36&quot;,&quot;Ax8QdOj1woOLjkxtEv2cav2Snid&quot;,&quot;UxK7deuJVoLW7BxQamncHEtcnwh&quot;,&quot;P2zwd5VSEoPL4YxpeYIcOc9Bn3g&quot;],&quot;type&quot;:&quot;table_cell&quot;,&quot;parent_id&quot;:&quot;WM2RdVHgcomGSnxNk6McneRHncd&quot;}}},&quot;payloadMap&quot;:{&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;:{&quot;level&quot;:1}},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;pasteRandomId&quot;:&quot;a01426fa-ff9d-4614-9b3f-df4e4f5e8b79&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{},&quot;isEqualBlockSelection&quot;:true},&quot;isKeepQuoteContainer&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1044,&quot;type&quot;:&quot;block&quot;,&quot;recordId&quot;:&quot;PMd2dAANEoaVEUx7w6mcSTwUnIc&quot;}],&quot;pasteFlag&quot;:&quot;4732dcc8-9910-479a-b709-ab0ae365fac1&quot;}" data-lark-record-format="docx/record" class="lark-record-clipboard"></span></td><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UR7zdHvsFoN0PPxLmFfcaORvnTe">推广页面自动绑定兑换码</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;推广页面自动绑定兑换码&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+b&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;491a0219-ba08-4934-9565-cd8b36c60ef6&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1045,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:12,&quot;end&quot;:23},&quot;recordId&quot;:&quot;UR7zdHvsFoN0PPxLmFfcaORvnTe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">eddiepeng、shimonyang </div></td><td class="ed">跟进中</td></tr>
+        <tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class="ace-line ace-line old-record-id-Ax8QdOj1woOLjkxtEv2cav2Snid">邀请活动奖励过期</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;邀请活动&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+4&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:true,&quot;pasteRandomId&quot;:&quot;b41f5cb1-1650-4993-b228-585573e03264&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1049,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:4},&quot;recordId&quot;:&quot;Ax8QdOj1woOLjkxtEv2cav2Snid&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UxK7deuJVoLW7BxQamncHEtcnwh">现金券到期前三天会发通知</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;现金券到期前三天会发通知&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+c&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;b6d5935f-00c8-4efd-8e02-f850c244535c&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1050,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:21,&quot;end&quot;:33},&quot;recordId&quot;:&quot;UxK7deuJVoLW7BxQamncHEtcnwh&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><span style="white-space: pre-wrap;">mavisliu、shimonyang</span></td><td class="ed">跟进中</td></tr>
+        <tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-CERHdJsXloouOMxqeEucHcoQn7b">多次催修改资料/修改资料被驳回</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;催修改资料/修改资料被驳回&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+d&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;89332f94-7cc4-4d10-9664-db0ce2093f9e&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1004,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:13},&quot;recordId&quot;:&quot;CERHdJsXloouOMxqeEucHcoQn7b&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed">1、<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;CDD资料审核系统迭代，随机选择领取工单模式优化为派单模式&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+t&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;809380d1-9657-470c-955b-c979564145f1&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1005,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:51,&quot;end&quot;:80},&quot;recordId&quot;:&quot;BuoYdRgn9oB81Rxdojcc3XoEnWg&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>CDD资料审核系统迭代，随机选择领取工单模式优化为派单模式<br>2、<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;新增多次驳回工单的回访协助机制，主动服务，减少多次驳回引起的不满意&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+x&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;6a7b3530-d992-4dad-9446-852abe08893c&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1006,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:46,&quot;end&quot;:79},&quot;recordId&quot;:&quot;W2DAdWOIqoNJgRxKqjDca52cnRe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>新增多次驳回工单的回访协助机制，主动服务，减少多次驳回引起的不满意<br>3、<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;审核员之间--初审与中台终审之间--中台终审与中台终审之间的审核标准不一致导致多次驳回。--专项质检中，后续会安排案例分析&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1p&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;c495f992-7b50-4a47-a6e8-f1c50da77271&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1007,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:30,&quot;end&quot;:91},&quot;recordId&quot;:&quot;BsTndxsEDodE8PxsQdKcMkjDnFx&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>审核员之间--初审与中台终审之间--中台终审与中台终审之间的审核标准不一致导致多次驳回。--专项质检中，后续会安排案例分析<br>4、<span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;驳回原因描述不够详细，机械化多次驳回&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+i&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;ff23984a-8863-4820-84d4-8826efb6fb65&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1009,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:18},&quot;recordId&quot;:&quot;NATudZXdtoCStVx5lWUcccBsnQD&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span>驳回原因描述不够详细，机械化多次驳回</td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">1、yunasun 、kaylalin </div><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">2、<span style="white-space: normal">alex 、kaylalin</span></div><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">3、<span style="white-space: normal">alex 、kaylalin</span></div><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">4、<span style="white-space: normal">alex 、kaylalin</span></div></td><td class="ed">跟进中<br>1、预计11月中旬测试，11月底上线使用<br>2、待新系统上线后确定流程，预计12月初完成<br>3、跟进中<br>4、11月底新系统上线时，会同步优化驳回原因选项功能</td></tr>
+        <tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-GiImdMs5doGwvzx02Bfcu31mnPb">开户驳回原因描述不清晰</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;开户驳回原因描述不清晰&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+b&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;4da9723f-8e6e-46ee-adee-3ba351e348e7&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1012,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:11},&quot;recordId&quot;:&quot;GiImdMs5doGwvzx02Bfcu31mnPb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-GiImdMs5doGwvzx02Bfcu31mnPb">驳回系统固定项与自定义项无法同时选择，影响审核驳回描述操作，优化操作系统</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;驳回系统固定项与自定义项无法同时选择，影响审核驳回描述操作&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+t&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;7ad281ee-f54a-483e-97a8-eaf552a55b3f&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1012,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:19,&quot;end&quot;:48},&quot;recordId&quot;:&quot;GiImdMs5doGwvzx02Bfcu31mnPb&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">sissiguo、kaylali </div></td><td class="ed">待排期</td></tr>
+      <tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-UBPwdZrTFocNndxu1lEc1ozOnKe">地址证明不符合被驳回是总开户驳回的主要原因，其中不支持酒店/服务式公寓/商业住址，前端未有相关说明</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;地址证明不符合被驳回是总开户驳回的主要原因，其中不支持酒店/服务式公寓/商业住址，前端未有相关说明&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+1d&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;6638b1d8-b3da-4845-9ab0-7cc284031a48&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1013,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:49},&quot;recordId&quot;:&quot;UBPwdZrTFocNndxu1lEc1ozOnKe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed">增加说明</td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">yunasun、kaylalin</div></td><td class="ed">待评估</td></tr><tr><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-Nk6YdF89HoQKEhxXwmocVZbfnwe">开户资料审核审核时间长</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;开户资料审核审核时间长&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+b&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;60be5737-192c-4c54-aba4-f2f0900d6245&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1014,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:0,&quot;end&quot;:11},&quot;recordId&quot;:&quot;Nk6YdF89HoQKEhxXwmocVZbfnwe&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-page-id="LtIFdqbjnoAxDfxzf5Hcj5SSnzh" data-lark-html-role="root" data-docx-has-block-data="false"><div class=" old-record-id-LfYqdMQ88owuDGx9ODnc0t7bnwd">实现AI自动通过部分低风险工单</div></div><span data-lark-record-data="{&quot;rootId&quot;:&quot;LtIFdqbjnoAxDfxzf5Hcj5SSnzh&quot;,&quot;text&quot;:{&quot;initialAttributedTexts&quot;:{&quot;text&quot;:{&quot;0&quot;:&quot;实现AI自动通过部分低风险工单&quot;},&quot;attribs&quot;:{&quot;0&quot;:&quot;*0+f&quot;}},&quot;apool&quot;:{&quot;numToAttrib&quot;:{&quot;0&quot;:[&quot;author&quot;,&quot;7143506482208702492&quot;]},&quot;nextNum&quot;:1,&quot;attribToNum&quot;:{&quot;author,7143506482208702492&quot;:0}}},&quot;type&quot;:&quot;text&quot;,&quot;referenceRecordMap&quot;:{},&quot;extra&quot;:{&quot;channel&quot;:&quot;saas&quot;,&quot;isEqualBlockSelection&quot;:false,&quot;pasteRandomId&quot;:&quot;337d1364-c26f-4a4a-a7d4-e475fd3daaf4&quot;,&quot;mention_page_title&quot;:{},&quot;external_mention_url&quot;:{}},&quot;isKeepQuoteContainer&quot;:false,&quot;isFromCode&quot;:false,&quot;selection&quot;:[{&quot;id&quot;:1015,&quot;type&quot;:&quot;text&quot;,&quot;selection&quot;:{&quot;start&quot;:53,&quot;end&quot;:68},&quot;recordId&quot;:&quot;LfYqdMQ88owuDGx9ODnc0t7bnwd&quot;}],&quot;payloadMap&quot;:{},&quot;isCut&quot;:false}" data-lark-record-format="docx/text" class="lark-record-clipboard"></span></td><td class="ed"><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;">apengxuzhu、kaylalin</div></td><td class="ed">跟进中<br><div data-zone-id="0" data-line-index="0" data-line="true" style="white-space: pre-wrap;"> 预计27年Q1上线</div></td></tr><tr><td class="ed">交易下单失败前端展示不清晰</td><td class="ed">增加失败具体原因</td><td class="ed">lucasli、evelynzhang</td><td class="ed">待评估</td></tr></tbody>
     </table>
-    <button class="add-btn" onclick="addPlan()">+ 新增计划行</button>
+    
   </div>
 
   <!-- 往期历史 -->
@@ -492,67 +415,67 @@
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">一、开户 / 账户</h2><span class="badge b-red ed">不满意 147 单(最多)</span><span class="sec-sat"><span class="v">89.53%</span><span class="p grn">▲ +2.08pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">56 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">56 单</span></h3>
             <ul class="qsum ed"><li>身份证审核不通过/资料被多次驳回;"挂起中不可改、驳回才可改"客服口径易错</li><li>内地/海外证件与地址证明不符,客户反复催审核</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例;区分挂起/驳回可改状态;自助修改指引;SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例;区分挂起/驳回可改状态;自助修改指引;SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题3 · 开户被驳回 / 补开户资料 <span class="cnt ed">16 单</span></h3>
+          <div class="blk"><h3 class="ed">问题3 · 开户被驳回 / 补开户资料 <span class="cnt ed">16 单</span></h3>
             <ul class="qsum ed"><li>地址证明不符多次被驳回、需补交英文地址证明</li><li>个别开户文件涉嫌造假按行政原因不予开通,客户不满要求退款</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">复盘高频驳回原因,优化驳回文案与驳回项,预计上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">复盘高频驳回原因,优化驳回文案与驳回项,预计上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">二、交易</h2><span class="badge b-org ed">不满意 125 单</span><span class="sec-sat"><span class="v">90.96%</span><span class="p red">▼ −1.59pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 微型、低价股 / OTC 交易限制 <span class="cnt ed">33 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 微型、低价股 / OTC 交易限制 <span class="cnt ed">33 单</span></h3>
             <ul class="qsum ed"><li>微型/低价股、碎股开仓与成交受限</li><li>暂不支持 F 字尾 OTC 股票交易;受限缺少下单前置提示</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">受限标的下单前置提示</span></div><div class="mdesc ed">前置规则与原因提示、替代路径;"不支持交易品类"清单供客服一键发送;公司行动期下单限制主动告知。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">受限标的下单前置提示</span></div><div class="mdesc ed">前置规则与原因提示、替代路径;"不支持交易品类"清单供客服一键发送;公司行动期下单限制主动告知。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题2 · 不知道使用了融资被扣利息 <span class="cnt ed">10 单</span></h3>
+          <div class="blk"><h3 class="ed">问题2 · 不知道使用了融资被扣利息 <span class="cnt ed">10 单</span></h3>
             <ul class="qsum ed"><li>客户不清楚已使用融资被扣利息</li><li>融资利息计算口径(360/365)一二线不一致</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">融资利息前置提醒</span></div><div class="mdesc ed">产生利息前主动提醒;交易页展示融资占用与预估利息。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">融资利息前置提醒</span></div><div class="mdesc ed">产生利息前主动提醒;交易页展示融资占用与预估利息。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">三、资金相关</h2><span class="badge b-org ed">不满意 72 单</span><span class="sec-sat"><span class="v">92.68%</span><span class="p grn">▲ +1.95pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 未超时催普通出金 / 催入金 <span class="cnt ed">15 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 未超时催普通出金 / 催入金 <span class="cnt ed">15 单</span></h3>
             <ul class="qsum ed"><li>账户有欠款及空头期权无现金可提;出金需 HKD 代理银行资料</li><li>未超时即催出/入金,觉得到账时效太久</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可查 + 主动推送</span></div><div class="mdesc ed">出/入金进度与预计到账可查、主动推送;可提金额区分"未交收/可提"并解释交收规则。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可查 + 主动推送</span></div><div class="mdesc ed">出/入金进度与预计到账可查、主动推送;可提金额区分"未交收/可提"并解释交收规则。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">四、活动</h2><span class="badge b-grn ed">不满意 44 单</span><span class="sec-sat"><span class="v">88.82%</span><span class="p grn">▲ +4.08pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 开户前没填兑换码,开户后无法补填 <span class="cnt ed">9 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 开户前没填兑换码,开户后无法补填 <span class="cnt ed">9 单</span></h3>
             <ul class="qsum ed"><li>开户前未输入 MH 兑换码,开户成功后无法补填,导致无法获得奖励</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户后限期补填兑换码</span></div><div class="mdesc ed">开户流程内提示兑换码填写时机;支持开户后限期补填或客服后台补录。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户后限期补填兑换码</span></div><div class="mdesc ed">开户流程内提示兑换码填写时机;支持开户后限期补填或客服后台补录。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题2 · 活动规则不清晰 / 催奖励发放 <span class="cnt ed">15 单</span></h3>
+          <div class="blk"><h3 class="ed">问题2 · 活动规则不清晰 / 催奖励发放 <span class="cnt ed">15 单</span></h3>
             <ul class="qsum ed"><li>梅花牛/梅花周边入金活动规则不清晰、AEON 礼券仍在等结算</li><li>催奖励发放;NUP 二重赏超期无法领取,客服未先查参与/入金状态</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">活动规则前置说明 + 奖励时效</span></div><div class="mdesc ed">活动规则(门槛/时限/奖励)在参与入口显著说明;奖励发放设时效与进度查询,超时自动跟进。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">活动规则前置说明 + 奖励时效</span></div><div class="mdesc ed">活动规则(门槛/时限/奖励)在参与入口显著说明;奖励发放设时效与进度查询,超时自动跟进。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">五、其他高频原因</h2><span class="badge b-gry ed">平台/客服/行情/财富/人员/销户/转仓 等</span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">平台基础体验 33 · 客服系统/流程 30 · 行情 28 <span class="cnt ed">91 单</span></h3>
+          <div class="blk"><h3 class="ed">平台基础体验 33 · 客服系统/流程 30 · 行情 28 <span class="cnt ed">91 单</span></h3>
             <ul class="qsum ed"><li><b>平台</b>:登录经典版需旧设备验证、收不到验证码</li><li><b>客服</b>:等 7 分钟未接入人工/刚接入即掉线、催投诉审核结果</li><li><b>行情</b>:功能不满、不熟悉、不送免费行情</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">登录验证 & 人工接入优化</span></div><div class="mdesc ed">优化短信验证码到达;缩短人工接入等待并防掉线;行情功能与权限说明前置。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">登录验证 &amp; 人工接入优化</span></div><div class="mdesc ed">优化短信验证码到达;缩短人工接入等待并防掉线;行情功能与权限说明前置。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">六、事故 / 敏感外汇政策(专项)</h2><span class="badge b-new ed">事故 20 · 敏感外汇 10</span></div>
-          <div class="blk new"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">事故(跨业务) <span class="cnt ed">20 单</span></h3>
+          <div class="blk new"><h3 class="ed">事故(跨业务) <span class="cnt ed">20 单</span></h3>
             <ul class="qsum ed"><li>系统异常 / 维护窗口 / 响应超时,如"周末系统维护导致无法登入 app"</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">维护窗口公告 + 降级体验</span></div><div class="mdesc ed">维护窗口提前公告+app 内提示、降级/只读体验;异常统一话术与补偿口径。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">维护窗口公告 + 降级体验</span></div><div class="mdesc ed">维护窗口提前公告+app 内提示、降级/只读体验;异常统一话术与补偿口径。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk new"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">敏感外汇政策(公关媒体事件 5 · app下架 5) <span class="cnt ed">10 单</span></h3>
+          <div class="blk new"><h3 class="ed">敏感外汇政策(公关媒体事件 5 · app下架 5) <span class="cnt ed">10 单</span></h3>
             <ul class="qsum ed"><li>CSRC 事件资金咨询不满、内地操作入金受限;app 下架相关咨询</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ + 舆情话术</span></div><div class="mdesc ed">制定内地合规/外汇政策统一口径与 FAQ;舆情敏感期设专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ + 舆情话术</span></div><div class="mdesc ed">制定内地合规/外汇政策统一口径与 FAQ;舆情敏感期设专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
       </div>
@@ -589,63 +512,63 @@
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">一、开户 / 账户</h2><span class="badge b-red ed">不满意 204 单</span><span class="sec-sat"><span class="v">87.45%</span><span class="p grn">▲ +3.06pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">81 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 催修改资料 / 无法修改资料 <span class="cnt ed">81 单</span></h3>
             <ul class="qsum ed"><li>身份证审核不通过/资料被多次驳回;"挂起中不可改、驳回才可改"客服口径易错</li><li>内地/海外证件与地址证明不符,客户反复催审核</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例;区分挂起/驳回可改状态;自助修改指引;SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例;区分挂起/驳回可改状态;自助修改指引;SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题2 · 催账户解除交易限制 <span class="cnt ed">27 单</span></h3>
+          <div class="blk"><h3 class="ed">问题2 · 催账户解除交易限制 <span class="cnt ed">27 单</span></h3>
             <ul class="qsum ed"><li>账户中等/重复开户受限、行政原因限制不满,要求尽快解除</li><li>解除条件与时效不明确,多次催办</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">限制类工单时效与主动告知</span></div><div class="mdesc ed">受限主动告知预计解除时间,话术标准化,快速升级。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">限制类工单时效与主动告知</span></div><div class="mdesc ed">受限主动告知预计解除时间,话术标准化,快速升级。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题3 · 开户被驳回 25 · 税务 15 · 账户信息 10 <span class="cnt ed">50 单</span></h3>
+          <div class="blk"><h3 class="ed">问题3 · 开户被驳回 25 · 税务 15 · 账户信息 10 <span class="cnt ed">50 单</span></h3>
             <ul class="qsum ed"><li>地址证明不符(如西语地址证明不接受翻译件)、证件不完整被驳回</li><li>税务(W8/CRS)与账户信息类咨询,规则/填写不清</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">证件/地址识别优化 + 税务标准解答</span></div><div class="mdesc ed">HK 证件识别(模糊反光)与地址证明识别优化;税务(W8/CRS)高频问题沉淀标准解答。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">证件/地址识别优化 + 税务标准解答</span></div><div class="mdesc ed">HK 证件识别(模糊反光)与地址证明识别优化;税务(W8/CRS)高频问题沉淀标准解答。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">二、交易</h2><span class="badge b-org ed">不满意 138 单</span><span class="sec-sat"><span class="v">92.55%</span><span class="p grn">▲ +2.87pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 下单失败报错 13 · 购买力/融资利息 19 <span class="cnt ed">32 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 下单失败报错 13 · 购买力/融资利息 19 <span class="cnt ed">32 单</span></h3>
             <ul class="qsum ed"><li>风控/行政原因禁止交易、有持仓却购买力不足;要求客服帮算爆仓价</li><li>不清楚已使用融资、被扣利息</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">下单失败原因文案 + 购买力/融资可视化</span></div><div class="mdesc ed">下单失败给明确原因(风控/购买力/公司行动);交易页展示购买力构成与融资占用、预估利息,利息前置提醒。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">下单失败原因文案 + 购买力/融资可视化</span></div><div class="mdesc ed">下单失败给明确原因(风控/购买力/公司行动);交易页展示购买力构成与融资占用、预估利息,利息前置提醒。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题2 · 否认下单 9 · 行权规则 9 · 资产分析 9 <span class="cnt ed">27 单</span></h3>
+          <div class="blk"><h3 class="ed">问题2 · 否认下单 9 · 行权规则 9 · 资产分析 9 <span class="cnt ed">27 单</span></h3>
             <ul class="qsum ed"><li>限价撮合价格、买卖盘价与市价不一致不理解;否认下单</li><li>资产分析逻辑不清、期权持仓通知有疑惑(已卖出仍显示)</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">成交/撤单展示 + 规则说明</span></div><div class="mdesc ed">成交/撤单历史清晰化;行权、撮合价格、买卖盘价差、资产分析逻辑页内说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">成交/撤单展示 + 规则说明</span></div><div class="mdesc ed">成交/撤单历史清晰化;行权、撮合价格、买卖盘价差、资产分析逻辑页内说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">三、资金相关</h2><span class="badge b-org ed">不满意 119 单</span><span class="sec-sat"><span class="v">90.73%</span><span class="p grn">▲ +3.05pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 未超时催出金 12 · 催退款 11 · 入金/eDDA <span class="cnt ed">38+ 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 未超时催出金 12 · 催退款 11 · 入金/eDDA <span class="cnt ed">38+ 单</span></h3>
             <ul class="qsum ed"><li>出金需 HKD 代理银行资料、可提不足;联名入金失败登记退款</li><li>eDDA 授权失败、跨行入金收手续费、入金流程不熟悉</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出金/退款进度可查 + eDDA 授权优化</span></div><div class="mdesc ed">出金/退款进度与预计到账可查、主动推送;排查 eDDA 授权失败;跨行手续费与最大可提前置说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出金/退款进度可查 + eDDA 授权优化</span></div><div class="mdesc ed">出金/退款进度与预计到账可查、主动推送;排查 eDDA 授权失败;跨行手续费与最大可提前置说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">四、活动</h2><span class="badge b-red ed">不满意 60 单</span><span class="sec-sat"><span class="v">84.74%</span><span class="p red">▼ −1.03pp</span></span></div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">问题1 · 催奖励 11 · 兑换码补填 7 · 获奖信息发错(下滑主因) <span class="cnt ed">18+ 单</span></h3>
+          <div class="blk"><h3 class="ed">问题1 · 催奖励 11 · 兑换码补填 7 · 获奖信息发错(下滑主因) <span class="cnt ed">18+ 单</span></h3>
             <ul class="qsum ed"><li><b>下滑主因</b>:Q1 财报季晒单活动因人工失误发错获奖信息,引发投诉</li><li>催奖励发放、开户后无法补填兑换码、赠股价值按收市价计算不满</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">获奖名单复核 + 奖励时效/兑换码补填</span></div><div class="mdesc ed">Q1 晒单人工发错获奖信息引发投诉→建获奖名单复核与口径校验;奖励发放设时效;开户后限期补填兑换码。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">获奖名单复核 + 奖励时效/兑换码补填</span></div><div class="mdesc ed">Q1 晒单人工发错获奖信息引发投诉→建获奖名单复核与口径校验;奖励发放设时效;开户后限期补填兑换码。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">五、其他高频 + 六、事故/敏感外汇</h2><span class="badge b-new ed">事故34 · 敏感外汇17</span></div>
-          <div class="blk new"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">事故 · SNXX 夜盘交易关闭 <span class="cnt ed">34 单</span></h3>
+          <div class="blk new"><h3 class="ed">事故 · SNXX 夜盘交易关闭 <span class="cnt ed">34 单</span></h3>
             <ul class="qsum ed"><li>本月集中反馈 SNXX 夜盘交易被关闭/不支持,未提前告知引发批量不满</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">SNXX 夜盘交易关闭对客沟通</span></div><div class="mdesc ed">交易品类调整提前公告+app 提示,统一话术与替代说明。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">SNXX 夜盘交易关闭对客沟通</span></div><div class="mdesc ed">交易品类调整提前公告+app 提示,统一话术与替代说明。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">客服系统42 · 转仓34 · 行情32 · 用户营销31 · 新股20 · 人员24 <span class="cnt ed">183 单</span></h3>
+          <div class="blk"><h3 class="ed">客服系统42 · 转仓34 · 行情32 · 用户营销31 · 新股20 · 人员24 <span class="cnt ed">183 单</span></h3>
             <ul class="qsum ed"><li>客服:恶意刷差评、催投诉审核;转仓:催转出;新股:"公司不上市费用不退"</li><li>行情:K线默认时段/免费行情;用户营销:积分商城商品质量;人员:解答错误·漏解答</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">刷差评识别/转出时效/商城质量/新股退费口径</span></div><div class="mdesc ed">恶意刷差评识别申诉;转出进度可查;积分商城商品质量核查;新股"公司不上市费用不退"明确规则;人员有效不满强化质检。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">刷差评识别/转出时效/商城质量/新股退费口径</span></div><div class="mdesc ed">恶意刷差评识别申诉;转出进度可查;积分商城商品质量核查;新股"公司不上市费用不退"明确规则;人员有效不满强化质检。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <div class="blk"><button class="del-btn" onclick="delBlk(this)">×</button><h3 class="ed">敏感外汇政策(公关媒体事件 10) <span class="cnt ed">17 单</span></h3>
+          <div class="blk"><h3 class="ed">敏感外汇政策(公关媒体事件 10) <span class="cnt ed">17 单</span></h3>
             <ul class="qsum ed"><li>内地无法入金/交易限制、境内转入资金受限;公关媒体事件延续</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ</span></div><div class="mdesc ed">统一内地合规/外汇口径与 FAQ,舆情敏感期专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ</span></div><div class="mdesc ed">统一内地合规/外汇口径与 FAQ,舆情敏感期专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
-          <button class="add-btn" onclick="addBlk(this)">+ 新增问题点</button>
+          
         </div>
 
       </div>
@@ -680,45 +603,45 @@
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">一、开户 / 账户</h2><span class="badge b-red ed">446 条(最多)</span><span class="sec-sat"><span class="v">84.39%</span><span class="p red">▼ −5.04pp</span></span></div>
           <div class="blk"><h3 class="ed">问题1 · 催修改资料 153 · 无法修改资料 40 <span class="cnt ed">193 单</span></h3>
             <ul class="qsum ed"><li>催修改资料:身份证审核不通过被驳回、地址与证件不符,反复催审核</li><li>无法修改:西班牙语地址证明不接受翻译件、缺符合要求的证明</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例、自助修改指引、SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">资料修改驳回体验优化</span></div><div class="mdesc ed">驳回明确原因+证件清单+范例、自助修改指引、SLA 与进度可查。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · 开户被驳回 61 · 催解除限制 47 · 催办类 27 · 税务 25 <span class="cnt ed">160 单</span></h3>
             <ul class="qsum ed"><li>开户被驳回/补资料、行政原因限制账户功能</li><li>PI 认证反复补充资料、税务(W8/CRS)相关咨询</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">开户材料前置 + 限制/进度可视化</span></div><div class="mdesc ed">材料清单前置、驳回项明确;限制类主动告知解除时间;开户/PI 进度可视化。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">开户材料前置 + 限制/进度可视化</span></div><div class="mdesc ed">材料清单前置、驳回项明确;限制类主动告知解除时间;开户/PI 进度可视化。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">二、交易</h2><span class="badge b-org ed">225 条</span><span class="sec-sat"><span class="v">89.68%</span><span class="p red">▼ −0.09pp</span></span></div>
           <div class="blk"><h3 class="ed">问题1 · 现金购买力/统一购买力 25 · 对风控逻辑 21 · 资产分析 18 <span class="cnt ed">64 单</span></h3>
             <ul class="qsum ed"><li>购买力为 0 咨询需入金多少、要求客服帮算爆仓价</li><li>风控逻辑不透明、资产分析逻辑不清</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">购买力/风控/资产分析透明化</span></div><div class="mdesc ed">展示购买力构成与融资占用、风控状态可见、资产分析加差额说明入口。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">购买力/风控/资产分析透明化</span></div><div class="mdesc ed">展示购买力构成与融资占用、风控状态可见、资产分析加差额说明入口。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">三、资金相关</h2><span class="badge b-org ed">209 条</span><span class="sec-sat"><span class="v">87.68%</span><span class="p red">▼ −1.48pp</span></span></div>
           <div class="blk"><h3 class="ed">问题1 · 提取资金失败 19 · 催退款 18 · 未超时催出金 18 · 催入金 17 <span class="cnt ed">72 单</span></h3>
             <ul class="qsum ed"><li>出金需 HKD 代理银行资料、银行账号错误致提取失败</li><li>联名入金失败登记退款、入金流程不熟悉、催出/退款</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可查 + 失败原因指引</span></div><div class="mdesc ed">出金/退款进度主动推送;提取失败给明确原因(账号校验);入金分步指引。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">出入金进度可查 + 失败原因指引</span></div><div class="mdesc ed">出金/退款进度主动推送;提取失败给明确原因(账号校验);入金分步指引。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">四、活动</h2><span class="badge b-grn ed">74 条</span><span class="sec-sat"><span class="v">85.77%</span><span class="p grn">▲ +2.77pp</span></span></div>
           <div class="blk"><h3 class="ed">问题1 · 活动奖励发放/兑换/规则 <span class="cnt ed">74 单</span></h3>
             <ul class="qsum ed"><li>催奖励发放、兑换码/领取入口不清</li><li>奖励过期失效、活动规则不清</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">奖励时效 + 规则前置说明</span></div><div class="mdesc ed">奖励发放时效与进度查询、活动规则在参与入口显著说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">奖励时效 + 规则前置说明</span></div><div class="mdesc ed">奖励发放时效与进度查询、活动规则在参与入口显著说明。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">五、其他高频原因</h2><span class="badge b-gry ed">转仓/客服/行情/平台/新股/人员/结单/销户</span></div>
           <div class="blk"><h3 class="ed">转仓 112 · 客服系统 100 · 行情 65 · 平台 61 · 新股 41 · 人员 36 · 结单 40 · 销户 40 <span class="cnt ed">合计约 495 单</span></h3>
             <ul class="qsum ed"><li>转仓催转出 90;客服:客户问题不明确 22/催回复 20/长时间未接入人工 19</li><li>行情:不熟悉 16/功能不满 15;平台旧设备验证 18;结单催证明 15</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">转出时效 + 人工接入 + 行情/平台说明</span></div><div class="mdesc ed">转出进度可查减催办;缩短人工接入并防掉线;行情功能与旧设备验证优化。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">转出时效 + 人工接入 + 行情/平台说明</span></div><div class="mdesc ed">转出进度可查减催办;缩短人工接入并防掉线;行情功能与旧设备验证优化。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">六、事故 / 敏感外汇政策(专项)</h2><span class="badge b-new ed">事故 77 · 敏感外汇 158</span></div>
           <div class="blk new"><h3 class="ed">敏感外汇政策 · 公关媒体事件 <span class="cnt ed">151 单</span></h3>
             <ul class="qsum ed"><li>内地无法入金/交易限制、境内转入资金受限</li><li>Margin Call 入金受限不清;延续 5.22 事件影响</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ + 舆情话术</span></div><div class="mdesc ed">统一内地合规/外汇口径与 FAQ,舆情敏感期专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">客服优化</span><span class="mtitle ed">内地合规/外汇口径 FAQ + 舆情话术</span></div><div class="mdesc ed">统一内地合规/外汇口径与 FAQ,舆情敏感期专项话术与升级通道。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
           <div class="blk new"><h3 class="ed">事故(跨业务) <span class="cnt ed">77 单</span></h3>
             <ul class="qsum ed"><li>系统异常 / 维护窗口 / 响应超时等,跨业务集中反馈</li></ul>
-            <div class="measures"><div class="mlabel">措施</div><div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">维护窗口公告 + 降级体验</span></div><div class="mdesc ed">维护窗口提前公告+app 提示、降级/只读体验、异常统一话术。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div><button class="add-m" onclick="addM(this)">+ 新增措施</button></div>
+            <div class="measures"><div class="mlabel">措施</div><div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">维护窗口公告 + 降级体验</span></div><div class="mdesc ed">维护窗口提前公告+app 提示、降级/只读体验、异常统一话术。</div><div class="mfoot"><span class="status"><i class="sdot s-todo"></i><span class="ed">待启动</span></span><span class="owner ed">负责人：待指派</span></div></div></div>
           </div>
         </div>
 
@@ -744,17 +667,17 @@
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">三、账户</h2><span class="badge b-grn ed">216 条 · +0.74pp(唯一回升)</span></div>
           <div class="blk"><h3 class="ed">问题1 · 开户被驳回/补开户资料 <span class="cnt ed">38 条 · 持续高位</span></h3><div class="mdesc ed">护照签证姓名不一致、地址证明不符(查无此地址)、涉嫌伪造结单、内地证件过期、资料反复被驳回要求退款。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">复盘发现相同原因被驳回频率高,优化驳回文案表达和驳回项,预计 6 月上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">HK 证件识别能力优化 + 地址证明识别</span></div><div class="mdesc ed">HK 证件识别前置判断(模糊/反光)预计 6 月上线;HK 地址证明识别预计 Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">地址证明不支持酒店/服务式住宅/商业地址导致被驳回</span></div><div class="mdesc ed">建议开户页前端及官网增加说明;因近期新规,该需求需延期,待紧急事项结束后再增加。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">复盘发现相同原因被驳回频率高,优化驳回文案表达和驳回项,预计 6 月上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">HK 证件识别能力优化 + 地址证明识别</span></div><div class="mdesc ed">HK 证件识别前置判断(模糊/反光)预计 6 月上线;HK 地址证明识别预计 Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">地址证明不支持酒店/服务式住宅/商业地址导致被驳回</span></div><div class="mdesc ed">建议开户页前端及官网增加说明;因近期新规,该需求需延期,待紧急事项结束后再增加。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · 内地/其他开户流程 <span class="cnt ed">21 条 · 政策合规</span></h3><div class="mdesc ed">内地客户仅持居民身份证无法开户、内地身份无法开户。</div></div>
           <div class="blk"><h3 class="ed">问题3 · 账户催促类合计 <span class="cnt ed">90 条(催修改38+催解除24+催开户/PI28)</span></h3><div class="mdesc ed">因 5.22 事件/证件过期催资料修改;催账户解除交易限制;开户审核超时反复催办、PI 认证多次驳回。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">AI 预审</span></div><div class="mdesc ed">长期方案:接入 AI 预审,项目已启动、方案评估阶段,预计 26 年 Q3 完成。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">AI 预审</span></div><div class="mdesc ed">长期方案:接入 AI 预审,项目已启动、方案评估阶段,预计 26 年 Q3 完成。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题4 · 不动户激活 <span class="cnt ed">22 条</span></h3><div class="mdesc ed">无境外身份/证明无法激活不动户;开户时未告知不动户规则,交易/出金时才发现。</div></div>
@@ -762,34 +685,34 @@
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">四、资金相关</h2><span class="badge b-org ed">261 条 · −1.48pp</span></div>
           <div class="blk"><h3 class="ed">问题1 · 5.26 出金超时事故 <span class="cnt ed">57 条 · 本期单一最大事件</span></h3><div class="mdesc ed">5.26 出金量太大系统超时处理、银证转账出金排队。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">5.26 出金超时问题</span></div><div class="mdesc ed">当天已处理完成。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">已完成</span></span><span class="owner ed">负责人：timzhang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">5.26 出金超时问题</span></div><div class="mdesc ed">当天已处理完成。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">已完成</span></span><span class="owner ed">负责人：timzhang</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · 未超时催普通出金 <span class="cnt ed">24 条</span></h3><div class="mdesc ed">觉得出金时间太久、需等下个港股交易日;卡在假期耗时久;私享客户希望用 CHATS 出金。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">支持小额(100万以内)自动出金</span></div><div class="mdesc ed">API 出金功能已全量,仍有历史数据问题待进一步优化。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">部分完成</span></span><span class="owner ed">负责人：timzhang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">支持小额(100万以内)自动出金</span></div><div class="mdesc ed">API 出金功能已全量,仍有历史数据问题待进一步优化。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">部分完成</span></span><span class="owner ed">负责人：timzhang</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题3 · 入金限制(非不动户) <span class="cnt ed">24 条 · 持续</span></h3><div class="mdesc ed">受限原因不清楚、解除流程不透明;前端弹窗文案缺激活条件说明。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">不动户入金限制前端弹窗说明优化</span></div><div class="mdesc ed">前端弹窗增加激活条件说明,内容过长暂无法直接添加,考虑跳转机器人后自动推送。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">不动户入金限制前端弹窗说明优化</span></div><div class="mdesc ed">前端弹窗增加激活条件说明,内容过长暂无法直接添加,考虑跳转机器人后自动推送。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
+              
             </div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">五、活动</h2><span class="badge b-red ed">77 条 · −5.08pp(降幅最大)</span></div>
           <div class="blk"><h3 class="ed">问题1 · KOL 地推渠道新客活动 <span class="cnt ed">14 条 · 活动类最大</span></h3><div class="mdesc ed">催奖励发放(三星/MH/MS/小斯/alipay)、不知去哪兑换;开户前未填兑换码开户后无法补填;现金券有效期内未使用过期要求补发。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">KOL 活动开户前未填兑换码导致无法获得奖励</span></div><div class="mdesc ed">后期可在推广页面自动绑定兑换码。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：joelin</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">KOL 活动开户前未填兑换码导致无法获得奖励</span></div><div class="mdesc ed">后期可在推广页面自动绑定兑换码。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：joelin</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · NUP 期权新客活动 <span class="cnt ed">11 条</span></h3><div class="mdesc ed">未开通加密货币致比特币奖励过期、未在期限内选奖过期失效、超市券显示已使用且过期、二重赏未按期入金无法获奖。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">活动客诉流程优化</span></div><div class="mdesc ed">活动奖励查询/补发需跨多系统,后期集中统一平台查询/补发。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：catherineqi</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">活动客诉流程优化</span></div><div class="mdesc ed">活动奖励查询/补发需跨多系统,后期集中统一平台查询/补发。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：catherineqi</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题3 · HK 邀请活动 <span class="cnt ed">8 条</span></h3><div class="mdesc ed">被邀请人未在 30 天内完成开户入金未获奖、被邀请人参与 KOL 活动导致邀请人无奖励。</div></div>
@@ -808,48 +731,48 @@
           <div class="blk"><h3 class="ed">问题1 · 微型/低价股限制 <span class="cnt ed">31 条 · 全新最大(0→29.8%)</span></h3><div class="mdesc ed">客户反映美股部分股票无法开仓,3 月完全没有,4 月初突然大量出现。</div></div>
           <div class="blk"><h3 class="ed">问题2 · 期货期权订单偏离价格 <span class="cnt ed">3.33%→5.8%</span></h3>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">期货期权订单偏离价格问题</span></div><div class="mdesc ed">1. 港股期权价偏优化,预计五一节前全量发布;2. 期货期权价偏,推进采购外部供应商理论价数据,采购完成后确认上线时间。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：channingwang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">期货期权订单偏离价格问题</span></div><div class="mdesc ed">1. 港股期权价偏优化,预计五一节前全量发布;2. 期货期权价偏,推进采购外部供应商理论价数据,采购完成后确认上线时间。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：channingwang</span></div></div>
+              
             </div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">二、账户</h2><span class="badge b-red ed">−3.84pp(降幅最大)</span></div>
           <div class="blk"><h3 class="ed">问题1 · 补开户资料 + 无法修改资料 + 催修改资料 <span class="cnt ed">显著上升</span></h3><div class="mdesc ed">补开户资料 11.2%→22.2%(地址证明不符/未申报税务/证件不完整);无法修改资料 2.0%→9.7%(不接受酒店/服务式住宅、手机号修改繁琐);催修改资料 9.2%→15.3%(内地证件过期、地址不完全一致被驳回)。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">客户可能不理解驳回消息内容;进一步细化文案表达和驳回项,5 月内上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料不符合要求被驳回问题</span></div><div class="mdesc ed">HK 证件识别能力优化(前置判断模糊/反光)5 月底左右上线;HK 地址证明识别预计 Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">地址证明不符合要求</span></div><div class="mdesc ed">前端说明场景不足(未提不支持酒店/服务式住宅、未说明原件格式),整理缺失场景反馈产品在前端增加说明。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kathyxu</span></div></div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">开户/修改资料被驳回多次</span></div><div class="mdesc ed">整理近期驳回场景的原因、次数、整体处理完成时间,拉起对齐优化流程。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kathyxu</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料多次被驳回问题</span></div><div class="mdesc ed">客户可能不理解驳回消息内容;进一步细化文案表达和驳回项,5 月内上线。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">开户资料不符合要求被驳回问题</span></div><div class="mdesc ed">HK 证件识别能力优化(前置判断模糊/反光)5 月底左右上线;HK 地址证明识别预计 Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-doing"></i><span class="ed">进行中</span></span><span class="owner ed">负责人：pengxuzhu</span></div></div>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">地址证明不符合要求</span></div><div class="mdesc ed">前端说明场景不足(未提不支持酒店/服务式住宅、未说明原件格式),整理缺失场景反馈产品在前端增加说明。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kathyxu</span></div></div>
+              <div class="measure"><div class="mtags"><span class="mtag m-new ed">本期</span><span class="mtag m-cat ed">流程优化</span><span class="mtitle ed">开户/修改资料被驳回多次</span></div><div class="mdesc ed">整理近期驳回场景的原因、次数、整体处理完成时间,拉起对齐优化流程。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kathyxu</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · 不动户激活 <span class="cnt ed"></span></h3><div class="mdesc ed">不动户限制规则不清晰、激活流程繁琐。</div></div>
           <div class="blk"><h3 class="ed">问题3 · 税务相关 + PI 认证 <span class="cnt ed">新兴集中</span></h3><div class="mdesc ed">税务相关 2.0%→9.7%;PI 认证 1.0%→6.9%(资产结单不是同一天不符合要求)。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">税务填写问题</span></div><div class="mdesc ed">前端增加填写指引(居住哪个国家就申报哪个国家税务),计划中,预期 2026 Q2-Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">税务填写问题</span></div><div class="mdesc ed">前端增加填写指引(居住哪个国家就申报哪个国家税务),计划中,预期 2026 Q2-Q3。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：sirihe</span></div></div>
+              
             </div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">三、资金相关</h2><span class="badge b-gry ed">−0.20pp(近持平)</span></div>
           <div class="blk"><h3 class="ed">问题1 · 未超时催普通出金 <span class="cnt ed">0→13.6%</span></h3><div class="mdesc ed">含门店误操作场景;客户在出金未超时前已不满催促。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">支持小额(100万以内)自动出金</span></div><div class="mdesc ed">API 出金功能已全量,仍有历史数据问题待进一步优化。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">支持小额(100万以内)自动出金</span></div><div class="mdesc ed">API 出金功能已全量,仍有历史数据问题待进一步优化。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
+              
             </div>
           </div>
           <div class="blk"><h3 class="ed">问题2 · 入金限制(非不动户) <span class="cnt ed">+5.7%,9 单</span></h3><div class="mdesc ed">客户对入金受限原因和处理流程不理解(9.6%→15.3%)。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">不动户入金限制问题</span></div><div class="mdesc ed">前端弹窗增加激活条件说明;需求重评估后因内容过长暂无法添加,考虑跳转机器人后自动推送。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">产品优化</span><span class="mtitle ed">不动户入金限制问题</span></div><div class="mdesc ed">前端弹窗增加激活条件说明;需求重评估后因内容过长暂无法添加,考虑跳转机器人后自动推送。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：timzhang</span></div></div>
+              
             </div>
           </div>
         </div>
         <div class="sec" style="box-shadow:none;border:1px solid #eee"><div class="sec-hd"><h2 class="ed">四、活动</h2><span class="badge b-grn ed">+0.94pp(满意度上升)</span></div>
           <div class="blk"><h3 class="ed">问题1 · 新客活动类 <span class="cnt ed">NUP 5 · HK邀请 5 · KOL 5</span></h3><div class="mdesc ed">NUP:奖励到期失效 3、超市卡券异常 1、二重赏规则 1;HK 邀请:被邀请人不符合规则 2、邀请关系未确认 2;KOL:催奖励 2、兑换码入口缺失 1、奖励过期 1。</div>
             <div class="measures"><div class="mlabel">措施</div>
-              <div class="measure"><span class="del-m" onclick="delM(this)">删除</span><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">话术</span><span class="mtitle ed">新客活动跨月无法获得二重赏奖励</span></div><div class="mdesc ed">新增关于跨月参加新客二重赏活动的处理流程和话术。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kaylalin</span></div></div>
-              <button class="add-m" onclick="addM(this)">+ 新增措施</button>
+              <div class="measure"><div class="mtags"><span class="mtag m-past ed">往期</span><span class="mtag m-cat ed">话术</span><span class="mtitle ed">新客活动跨月无法获得二重赏奖励</span></div><div class="mdesc ed">新增关于跨月参加新客二重赏活动的处理流程和话术。</div><div class="mfoot"><span class="status"><i class="sdot s-follow"></i><span class="ed">跟进中</span></span><span class="owner ed">负责人：kaylalin</span></div></div>
+              
             </div>
           </div>
         </div>
@@ -986,5 +909,6 @@ ensureMoveControls();ensureFootControls();markEmptyMeasures();planEnhance();
 document.addEventListener('input',function(e){if(document.body.classList.contains('edit-on'))saveLocal();});
 (function(){var _b=document.body;_b.addEventListener('click',function(e){var t=e.target;if(t&&t.closest&&(t.closest('.add-btn,.del-btn,.add-m,.del-m,.blk-move,.foot-x,.foot-add,.col-x,.row-tools,.add-foot,.sec-del'))){setTimeout(saveLocal,60);}});})();
 </script>
-</body>
-</html>
+
+
+</body></html>
